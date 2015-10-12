@@ -1,3 +1,4 @@
 *.swf
-./obj
+obj/
+index.html
 ISG\ Project.as3proj
