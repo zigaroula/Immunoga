@@ -4,7 +4,6 @@ package components.SystemeImmunitaire {
 	public class LymphocyteB extends Component {
 		
 		
-		
 	}
 
 }
