@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource>
+	<!-- Définition des alias -->
+	<a name="Transform" class="com.ktm.genome.render.component.Transform" />
+	<a name="TextureResource" class="com.ktm.genome.resource.component.TextureResource" />
+	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
+	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
+	<!-- Définition des entités -->
+	<!-- entité 1 -->
+	<e>
+		<Transform x="0" y="0" />
+		<Layer id="gameLayer" index="1" />
+	</e>
+	<!-- entité 2 -->
+	<e>
+		<Transform x="100" y="100" />
+		<TextureResource source="pictures/macro.png" id="macrophage" />
+		<Layered layerId="gameLayer" />
+	</e>
+	<!-- entité 3 -->
+	<e>
+		<Transform x="200" y="200" />
+		<TextureResource source="pictures/macro.png" id="macrophage" />
+		<Layered layerId="gameLayer" />
+	</e>
+</resource>
