@@ -5,11 +5,23 @@
 	<a name="TextureResource" class="com.ktm.genome.resource.component.TextureResource" />
 	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
 	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
+	<a name="TargetPos" class="com.lip6.genome.geography.move.component.TargetPos" />
+
+	<!--<a name="Ship" class="components.Ship" />-->
+
 	<!-- Définition des entités -->
 	<!-- entité 1 -->
 	<e>
 		<Transform x="0" y="0" />
 		<Layer id="gameLayer" index="1" />
+	</e>
+	
+	<e>
+		<Transform x="400" y="500" />
+		<TargetPos x="400" y="500" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/selection.png" id="ship" />
+		<!--<Ship />-->
 	</e>
 	<!-- entité 2 -->
 	<e>

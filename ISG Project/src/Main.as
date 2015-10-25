@@ -8,8 +8,19 @@ package {
 	import com.lip6.genome.geography.move.system.MoveToSystem;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	
+	
+	import flash.events.MouseEvent;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
+	import com.ktm.genome.core.entity.family.Family;
+	import com.ktm.genome.core.entity.IEntity;
+	import com.ktm.genome.render.component.Transform;
+	import com.lip6.genome.geography.move.component.TargetPos;
+	import com.ktm.genome.core.entity.family.matcher.allOfGenes;
+	import com.ktm.genome.core.data.gene.GeneManager;
+	import com.ktm.genome.core.data.component.IComponentMapper;
+
 	public class Main extends Sprite {
 		
 		private var world:IWorld;
@@ -32,6 +43,7 @@ package {
 			//start
 			EntityFactory.createResourcedEntity(world.getEntityManager(), gameURL, "game");
 			
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, _keyPressedDown);
 			stage.addEventListener(MouseEvent.CLICK, _onStageMouseDown);
 		}
 		
@@ -39,6 +51,37 @@ package {
 			EntityFactory.createEntityXY(world.getEntityManager(), e.localX, e.localY);
 		}
 		
+		private function _keyPressedDown(e:KeyboardEvent):void {
+			//TODO: with Ship gene
+			var ships:Family = world.getEntityManager().getFamily(allOfGenes(Transform, TargetPos));
+			
+			var geneManager:GeneManager = world.getGeneManager();
+			var transformMapper:IComponentMapper = geneManager.getComponentMapper(Transform);
+			if (ships.members.length > 0) {
+				var s:IEntity = ships.members[0];
+				trace(s);					
+	
+				var tr:Transform = transformMapper.getComponent(s);			
+				var speed = 10;
+			
+				var key:uint = e.keyCode;
+					var step:uint = 5
+					switch (key) {
+						case Keyboard.LEFT :
+							tr.x = tr.x - speed;
+							break;
+						case Keyboard.RIGHT :
+							tr.x = tr.x + speed;
+							break;
+						/*case Keyboard.UP :
+							break;
+						case Keyboard.DOWN :
+							break;*/
+						case Keyboard.SPACE:
+							EntityFactory.createEntityXY(world.getEntityManager(), tr.x, tr.y);
+					}	
+			}
+		}
 	}
 	
 }

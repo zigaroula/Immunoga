@@ -8,6 +8,7 @@ package {
 	import com.ktm.genome.resource.component.TextureResource;
 	import com.lip6.genome.geography.move.component.Speed;
 	import com.lip6.genome.geography.move.component.TargetPos;
+	//import components.Ship;
 	
 	public class EntityFactory {
 		static public function createResourcedEntity(em:IEntityManager, _source:String, _id:String):void {
