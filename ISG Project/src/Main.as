@@ -5,10 +5,15 @@ package {
 	import com.ktm.genome.render.system.RenderSystem;
 	import com.ktm.genome.core.logic.process.ProcessPhase;
 	import com.ktm.genome.resource.manager.ResourceManager;
+	import com.lip6.genome.geography.move.system.MoveToSystem;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	public class Main extends Sprite {
+		
+		private var world:IWorld;
+		private var gameURL:String = 'xml/game.entityBundle.xml';
 		
 		public function Main() {
 			if (stage) init();
@@ -18,14 +23,20 @@ package {
 		private function init(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
-			var world:IWorld = BigBang.createWorld(stage);
+			world = BigBang.createWorld(stage);
 			var sm:ISystemManager = world.getSystemManager();
 			//set systems
 			sm.setSystem(ResourceManager).setProcess(ProcessPhase.TICK, int.MAX_VALUE);
 			sm.setSystem(new RenderSystem(this)).setProcess(ProcessPhase.FRAME);
+			sm.setSystem(MoveToSystem).setProcess(ProcessPhase.FRAME);
 			//start
-			var gameURL:String = 'xml/game.entityBundle.xml';
 			EntityFactory.createResourcedEntity(world.getEntityManager(), gameURL, "game");
+			
+			stage.addEventListener(MouseEvent.CLICK, _onStageMouseDown);
+		}
+		
+		private function _onStageMouseDown(e:MouseEvent):void {	
+			EntityFactory.createEntityXY(world.getEntityManager(), e.localX, e.localY);
 		}
 		
 	}
