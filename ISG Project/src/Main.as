@@ -44,7 +44,7 @@ package {
 		/*private function _onStageMouseDown(e:MouseEvent):void {	
 		}*/
 		
-		private function keyPressedDown (e:KeyboardEvent) {
+		private function keyPressedDown (e:KeyboardEvent) :void {
 			Controller.ControlShip(e, world);
 		}
 	}
