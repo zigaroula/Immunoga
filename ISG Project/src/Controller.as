@@ -52,5 +52,61 @@ package
 				
 		}
 		
+		/* ---- ALTERNATIVE MOVEMENTS ---- */
+		
+		static private var hash:Object = { };
+		static private var cpt:Number = 0;
+		
+		static public function keyHandleUp(event:KeyboardEvent):void {
+			delete hash[event.keyCode];
+		}
+		
+		static public function keyHandleDown(event:KeyboardEvent):void {
+			hash[event.keyCode] = 1;
+		}
+		
+		static public function isKeyDown(code:int):Boolean {
+			return hash[code] !== undefined;
+		}
+		
+		static public function ControlShipAlt(world:IWorld) :void {
+			//TODO: with Ship gene
+			var ships:Family = world.getEntityManager().getFamily(allOfGenes(Transform, TargetPos));
+			
+			var geneManager:GeneManager = world.getGeneManager();
+			var transformMapper:IComponentMapper = geneManager.getComponentMapper(Transform);
+			
+			if (ships.members.length < 1)
+				return;
+				
+			var s:IEntity = ships.members[0];	
+			var tr:Transform = transformMapper.getComponent(s);
+			
+			if (isKeyDown(Keyboard.LEFT)) {
+				tr.x = tr.x - speed;
+			}
+			
+			if (isKeyDown(Keyboard.RIGHT)) {
+				tr.x = tr.x + speed;
+			}
+			
+			if (isKeyDown(Keyboard.UP)) {
+				tr.y = tr.y - speed;
+			}
+			
+			if (isKeyDown(Keyboard.DOWN)) {
+				tr.y = tr.y + speed;
+			}
+			
+			if (isKeyDown(Keyboard.A)) {
+				if (cpt>=5) {
+					EntityFactory.createEntityXY(world.getEntityManager(), tr.x, tr.y);
+					cpt = 0;
+				}
+				cpt++;
+			}
+				
+		}
+		
 	}
 }

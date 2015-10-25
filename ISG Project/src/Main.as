@@ -37,36 +37,34 @@ package {
 			//start
 			EntityFactory.createResourcedEntity(world.getEntityManager(), gameURL, "game");
 			
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
+			//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
 			//stage.addEventListener(MouseEvent.CLICK, _onStageMouseDown);
+			
+			/* ---- ALTERNATIVE MOVEMENTS ---- */
+			stage.addEventListener(KeyboardEvent.KEY_UP, keyHandleUp);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandleDown);
+			addEventListener(Event.ENTER_FRAME, keyHandler);
 		}
 		
 		/*private function _onStageMouseDown(e:MouseEvent):void {	
 		}*/
+		
 		/*
 		private function keyPressedDown(e:KeyboardEvent):void {
 			Controller.ControlShip(e, world);
 		}
 		*/
-		private var functionOnKeyboardPress:Function;
 		
-		private function keyPressedDown(e:KeyboardEvent):void {
-			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
-			stage.addEventListener(KeyboardEvent.KEY_UP, keyPressedUp);
-			functionOnKeyboardPress = onKeyboardPress(e);
-			addEventListener(Event.ENTER_FRAME, functionOnKeyboardPress);
+		private function keyHandleUp(event:KeyboardEvent):void {
+			Controller.keyHandleUp(event);
 		}
 		
-		private function keyPressedUp(e:KeyboardEvent):void {
-			removeEventListener(Event.ENTER_FRAME, functionOnKeyboardPress);
-			stage.removeEventListener(KeyboardEvent.KEY_UP, keyPressedUp);
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
+		private function keyHandleDown(event:KeyboardEvent):void {
+			Controller.keyHandleDown(event);
 		}
 		
-		private function onKeyboardPress(ev:KeyboardEvent):Function {
-			return function(e:Event):void {
-				Controller.ControlShip(ev, world);
-			};
+		private function keyHandler(event:Event):void {
+			Controller.ControlShipAlt(world);
 		}
 	}
 	

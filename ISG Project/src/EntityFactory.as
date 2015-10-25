@@ -23,7 +23,7 @@ package {
 			em.addComponent (e, Transform, {x:_x, y:_y} );
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
 			em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );
-			em.addComponent (e, Speed, { velocity:3 } );
+			em.addComponent (e, Speed, { velocity:10 } );
 			em.addComponent (e, TargetPos, { x: _x, y:0 } );
 		}
 	}
