@@ -6,6 +6,7 @@ package {
 	import com.ktm.genome.core.logic.process.ProcessPhase;
 	import com.ktm.genome.resource.manager.ResourceManager;
 	import com.lip6.genome.geography.move.system.MoveToSystem;
+	import systems.CollisionSystem;
 	import flash.display.Sprite;
 	import flash.events.Event;	
 	
@@ -32,6 +33,7 @@ package {
 			sm.setSystem(ResourceManager).setProcess(ProcessPhase.TICK, int.MAX_VALUE);
 			sm.setSystem(new RenderSystem(this)).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(MoveToSystem).setProcess(ProcessPhase.FRAME);
+			sm.setSystem(CollisionSystem).setProcess(ProcessPhase.FRAME);
 			//start
 			EntityFactory.createResourcedEntity(world.getEntityManager(), gameURL, "game");
 			
