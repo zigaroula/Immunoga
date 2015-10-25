@@ -43,9 +43,30 @@ package {
 		
 		/*private function _onStageMouseDown(e:MouseEvent):void {	
 		}*/
-		
-		private function keyPressedDown (e:KeyboardEvent) :void {
+		/*
+		private function keyPressedDown(e:KeyboardEvent):void {
 			Controller.ControlShip(e, world);
+		}
+		*/
+		private var functionOnKeyboardPress:Function;
+		
+		private function keyPressedDown(e:KeyboardEvent):void {
+			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
+			stage.addEventListener(KeyboardEvent.KEY_UP, keyPressedUp);
+			functionOnKeyboardPress = onKeyboardPress(e);
+			addEventListener(Event.ENTER_FRAME, functionOnKeyboardPress);
+		}
+		
+		private function keyPressedUp(e:KeyboardEvent):void {
+			removeEventListener(Event.ENTER_FRAME, functionOnKeyboardPress);
+			stage.removeEventListener(KeyboardEvent.KEY_UP, keyPressedUp);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
+		}
+		
+		private function onKeyboardPress(ev:KeyboardEvent):Function {
+			return function(e:Event):void {
+				Controller.ControlShip(ev, world);
+			};
 		}
 	}
 	

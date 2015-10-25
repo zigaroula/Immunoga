@@ -40,10 +40,12 @@ package
 				case Keyboard.RIGHT :
 					tr.x = tr.x + speed;
 					break;
-				/*case Keyboard.UP :
+				case Keyboard.UP :
+					tr.y = tr.y - speed;
 					break;
 				case Keyboard.DOWN :
-					break;*/
+					tr.y = tr.y + speed;
+					break;
 				case Keyboard.SPACE:
 					EntityFactory.createEntityXY(world.getEntityManager(), tr.x, tr.y);
 			}
