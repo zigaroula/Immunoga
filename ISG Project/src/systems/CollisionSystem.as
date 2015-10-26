@@ -12,7 +12,7 @@ package systems {
 		import com.ktm.genome.core.entity.IEntity;
 		import com.ktm.genome.core.logic.system.System;
 		import com.ktm.genome.render.component.Transform;
-		import com.lip6.genome.geography.move.component.TargetPos;		
+		import com.lip6.genome.geography.move.component.TargetPos;
 		
 		override protected function onConstructed():void {
 			super.onConstructed();
