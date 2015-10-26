@@ -37,35 +37,12 @@ package {
 			//start
 			EntityFactory.createResourcedEntity(world.getEntityManager(), gameURL, "game");
 			
-			//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressedDown);
-			//stage.addEventListener(MouseEvent.CLICK, _onStageMouseDown);
 			
-			/* ---- ALTERNATIVE MOVEMENTS ---- */
-			stage.addEventListener(KeyboardEvent.KEY_UP, keyHandleUp);
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandleDown);
-			addEventListener(Event.ENTER_FRAME, keyHandler);
+			Controller.init(stage, world);
+
 		}
 		
-		/*private function _onStageMouseDown(e:MouseEvent):void {	
-		}*/
 		
-		/*
-		private function keyPressedDown(e:KeyboardEvent):void {
-			Controller.ControlShip(e, world);
-		}
-		*/
-		
-		private function keyHandleUp(event:KeyboardEvent):void {
-			Controller.keyHandleUp(event);
-		}
-		
-		private function keyHandleDown(event:KeyboardEvent):void {
-			Controller.keyHandleDown(event);
-		}
-		
-		private function keyHandler(event:Event):void {
-			Controller.ControlShipAlt(world);
-		}
 	}
 	
 }
