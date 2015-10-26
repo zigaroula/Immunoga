@@ -11,6 +11,7 @@
 	
 	<a name="Ship" class="components.Game.Ship" />
 
+	<a name="Background" class="components.Game.Background" />
 	<!-- Définition des entités -->
 	<!-- entité 1 -->
 	<e>
@@ -21,12 +22,13 @@
 		<e>
 		<Transform x="0" y="0" />
 		<Layer id="background" index="0" />
+		<Background />
 	</e>
 	
 	<e>
-		<Transform x="0" y="0" />
+		<Transform x="0" y="-720" />
 		<Layered layerId="background" />
-		<TextureResource source="pictures/doge.png" id="background" />
+		<TextureResource source="pictures/doge.png" id="background" repeat="on" />
 	</e>
 	<e>
 		<Transform x="200" y="600 " />
