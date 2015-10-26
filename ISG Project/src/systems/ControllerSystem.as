@@ -22,10 +22,12 @@ package systems {
 		private var speed:Number = 10;			
 		private var hash:Object = { };
 		private var cpt:Number = 0;
+		private var type:int = Global.MACROPHAGE;
 		
 		public function ControllerSystem(stage:Stage) {
 			stage.addEventListener(KeyboardEvent.KEY_UP, keyHandleUp);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandleDown);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
 		}
 		
 		override protected function onConstructed():void {
@@ -56,7 +58,7 @@ package systems {
 			
 			if (isKeyDown(Keyboard.SPACE)) {
 				if (cpt>=5) {
-					EntityFactory.createEntityXY(world.getEntityManager(), tr.x, tr.y);
+					EntityFactory.createEntityOfType(entityManager, tr.x, tr.y, type);
 					cpt = 0;
 				}
 				cpt++;
@@ -75,6 +77,19 @@ package systems {
 			return hash[code] !== undefined;
 		}
 		
+		private function keyPressed(e:KeyboardEvent):void {
+			switch(e.keyCode) {
+				case Keyboard.F1:
+					type = Global.MACROPHAGE;
+					break;
+				case Keyboard.F2:
+					type = Global.LYMPHOCYTEB;
+					break;
+				case Keyboard.F3:
+					type = Global.LYMPHOCYTET;
+					break;
+			}
+		}
 	}
 
 }

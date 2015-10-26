@@ -22,7 +22,7 @@ package systems {
 		import components.Game.Ship;
 		import components.SystemeImmunitaire.Macrophage;
 		import components.Intrus.Bacterie;
-				
+		
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
@@ -46,7 +46,7 @@ package systems {
 				var target:TargetPos = targetMapper.getComponent(e);
 				
 				//top border->kill
-				if (tr.y == 0)
+				if (tr.y == -20)
 					entityManager.killEntity(e);	
 			}
 

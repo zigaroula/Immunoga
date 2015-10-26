@@ -2,13 +2,15 @@ package {
 	import com.ktm.genome.core.entity.IEntity;
 	import com.ktm.genome.resource.component.EntityBundle;
 	import com.ktm.genome.core.entity.IEntityManager;
-	
 	import com.ktm.genome.render.component.Transform;
 	import com.ktm.genome.render.component.Layered;
 	import com.ktm.genome.resource.component.TextureResource;
 	import com.lip6.genome.geography.move.component.Speed;
 	import com.lip6.genome.geography.move.component.TargetPos;
+
 	import components.SystemeImmunitaire.Macrophage;
+	import components.SystemeImmunitaire.LymphocyteB;
+	import components.SystemeImmunitaire.LymphocyteT;
 	
 	public class EntityFactory {
 		static public function createResourcedEntity(em:IEntityManager, _source:String, _id:String):void {
@@ -24,8 +26,30 @@ package {
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
 			em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );
 			em.addComponent (e, Speed, { velocity:10 } );
-			em.addComponent (e, TargetPos, { x: _x, y:0 } );
+			em.addComponent (e, TargetPos, { x: _x, y:-20 } );
 			em.addComponent (e, Macrophage);
+		}
+		
+		static public function createEntityOfType(em:IEntityManager, _x:int, _y:int, _type:int):void {
+			var e:IEntity = em.create();
+			em.addComponent (e, Transform, {x:_x, y:_y} );
+			em.addComponent (e, Layered, { layerId:"gameLayer" } );
+			em.addComponent (e, Speed, { velocity:10 } );
+			em.addComponent (e, TargetPos, { x: _x, y: -20 } );
+			switch(_type) {
+				case Global.MACROPHAGE:
+					em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );
+					em.addComponent (e, Macrophage, { absorb:10 } );
+					break;
+				case Global.LYMPHOCYTEB:
+					em.addComponent (e, TextureResource, { source:"pictures/bCell.png", id:"lymphocyteb" } );
+					em.addComponent (e, LymphocyteB, { } );
+					break;
+				case Global.LYMPHOCYTET:
+					em.addComponent (e, TextureResource, { source:"pictures/tCell.png", id:"lymphocytet" } );
+					em.addComponent (e, LymphocyteT, { } );
+					break;
+			}
 		}
 	}
 }
