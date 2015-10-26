@@ -35,7 +35,7 @@ package {
 			em.addComponent (e, Transform, {x:_x, y:_y} );
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
 			em.addComponent (e, Speed, { velocity:10 } );
-			em.addComponent (e, TargetPos, { x: _x, y: -20 } );
+			em.addComponent (e, TargetPos, { x: _x, y: -50 } );
 			switch(_type) {
 				case Global.MACROPHAGE:
 					em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );

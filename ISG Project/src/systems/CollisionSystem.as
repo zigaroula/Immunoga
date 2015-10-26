@@ -2,11 +2,13 @@ package systems {
 	
 	import com.ktm.genome.core.entity.family.Family;
 	import com.ktm.genome.core.logic.system.System;
+	import components.Game.Ship;
 	
 	public class CollisionSystem extends System {
 		private var movingEntities:Family;
 		private var macrophages:Family;
 		private var bacteries:Family;
+		private var ships:Family;
 		
 		private var targetMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
@@ -26,7 +28,7 @@ package systems {
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
-			var ships:Family = world.getEntityManager().getFamily(allOfGenes(Ship));
+			ships = entityManager.getFamily(allOfGenes(Ship));
 			
 			movingEntities = entityManager.getFamily(allOfGenes(Transform, TargetPos));
 			macrophages = entityManager.getFamily(allOfGenes(Macrophage));
@@ -46,7 +48,7 @@ package systems {
 				var target:TargetPos = targetMapper.getComponent(e);
 				
 				//top border->kill
-				if (tr.y == -20)
+				if (tr.y == -50)
 					entityManager.killEntity(e);	
 			}
 

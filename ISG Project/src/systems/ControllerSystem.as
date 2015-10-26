@@ -45,16 +45,16 @@ package systems {
 			var tr:Transform = transformMapper.getComponent(s);
 			
 			if (isKeyDown(Keyboard.LEFT))
-				tr.x = tr.x - speed;
-			
+				tr.x = Math.min(Math.max(0, tr.x - speed), 405 - 20);
+				
 			if (isKeyDown(Keyboard.RIGHT))
-				tr.x = tr.x + speed;
+				tr.x = Math.min(Math.max(0, tr.x + speed), 405 - 20);
 			
 			if (isKeyDown(Keyboard.UP))
-				tr.y = tr.y - speed;
+				tr.y = Math.min(Math.max(0, tr.y - speed), 720 - 20);
 			
 			if (isKeyDown(Keyboard.DOWN))
-				tr.y = tr.y + speed;
+				tr.y = Math.min(Math.max(0, tr.y + speed), 720 - 20);
 			
 			if (isKeyDown(Keyboard.SPACE)) {
 				if (cpt>=5) {
