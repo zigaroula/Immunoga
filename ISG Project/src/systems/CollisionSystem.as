@@ -22,8 +22,7 @@ package systems {
 		import components.Game.Ship;
 		import components.SystemeImmunitaire.Macrophage;
 		import components.Intrus.Bacterie;
-		
-		
+				
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
