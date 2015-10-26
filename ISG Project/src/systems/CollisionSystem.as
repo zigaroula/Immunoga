@@ -51,23 +51,27 @@ package systems {
 					entityManager.killEntity(e);	
 			}
 
-			
+			processCollisions(macrophages, bacteries);
 			//macrophage bacterie			
-			var n1:int = macrophages.members.length;
-			var n2:int = bacteries.members.length;
+			
+		}
+ 
+		//f1-f2 -> delete f2
+		private function processCollisions( f1:Family, f2:Family):void {
+			var n1:int = f1.members.length;
+			var n2:int = f2.members.length;
 						
 			for (var i:int = 0 ; i < n1 ; i++) {
-				var a:IEntity = macrophages.members[i];
+				var a:IEntity = f1.members[i];
 				var ta:Transform = transformMapper.getComponent(a);
 
 				for (var j:int = 0; j < n2 ; j++) {
-					var b:IEntity = bacteries.members[j];
+					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
 					if (collision(ta, tb))
 						entityManager.killEntity(b);
 				}
 			}
-
 		}
 		
 		static private var deltax:Number = 15;
@@ -76,6 +80,5 @@ package systems {
 			//trace("COMPARING" + ta.x + tb.x + "  " + ta.y + tb.y );
 			return ( (Math.abs(ta.x - tb.x) < deltax) && (Math.abs(ta.y - tb.y) < deltay) );
 		}
-	}	
-
+	}
 }
