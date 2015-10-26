@@ -6,8 +6,9 @@
 	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
 	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
 	<a name="TargetPos" class="com.lip6.genome.geography.move.component.TargetPos" />
-
-	<!--<a name="Ship" class="components.Ship" />-->
+	<!--<a name="Macrophage" class="components.Intrus.Virus" />
+	-->
+	<a name="Ship" class="components.Game.Ship" />
 
 	<!-- Définition des entités -->
 	<!-- entité 1 -->
@@ -16,23 +17,22 @@
 		<Layer id="gameLayer" index="1" />
 	</e>
 	
+		<e>
+		<Transform x="0" y="0" />
+		<Layer id="background" index="0" />
+	</e>
+	
 	<e>
-		<Transform x="400" y="500" />
-		<TargetPos x="400" y="500" />
+		<Transform x="0" y="0" />
+		<Layered layerId="background" />
+		<TextureResource source="pictures/doge.png" id="background" />
+	</e>
+	
+	<e>
+		<Transform x="400" y="401" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/selection.png" id="ship" />
-		<!--<Ship />-->
-	</e>
-	<!-- entité 2 -->
-	<e>
-		<Transform x="100" y="100" />
-		<TextureResource source="pictures/macro.png" id="macrophage" />
-		<Layered layerId="gameLayer" />
-	</e>
-	<!-- entité 3 -->
-	<e>
-		<Transform x="200" y="200" />
-		<TextureResource source="pictures/macro.png" id="macrophage" />
-		<Layered layerId="gameLayer" />
+		<Ship />
+		
 	</e>
 </resource>

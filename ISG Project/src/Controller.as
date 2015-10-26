@@ -14,6 +14,8 @@ package
 	import com.ktm.genome.core.data.component.IComponentMapper;
 	import flash.events.Event;
 	import flash.display.Stage;
+	import components.SystemeImmunitaire.Macrophage;
+	import components.Game.Ship;
 	
 	public class Controller 
 	{
@@ -47,8 +49,7 @@ package
 		}
 		
 		static public function ControlShip(event:Event) :void {
-			//TODO: with Ship gene
-			var ships:Family = world.getEntityManager().getFamily(allOfGenes(Transform, TargetPos));
+			var ships:Family = world.getEntityManager().getFamily(allOfGenes(Ship));
 			
 			var geneManager:GeneManager = world.getGeneManager();
 			var transformMapper:IComponentMapper = geneManager.getComponentMapper(Transform);
