@@ -6,8 +6,9 @@
 	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
 	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
 	<a name="TargetPos" class="com.lip6.genome.geography.move.component.TargetPos" />
-	<!--<a name="Macrophage" class="components.Intrus.Virus" />
-	-->
+	
+	<a name="Bacterie" class="components.Intrus.Bacterie" />
+	
 	<a name="Ship" class="components.Game.Ship" />
 
 	<!-- Définition des entités -->
@@ -27,12 +28,17 @@
 		<Layered layerId="background" />
 		<TextureResource source="pictures/doge.png" id="background" />
 	</e>
-	
 	<e>
-		<Transform x="400" y="401" />
+		<Transform x="200" y="600 " />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/selection.png" id="ship" />
 		<Ship />
-		
+	</e>
+	
+	<e>
+		<Transform x="200" y="20" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bacterie" />
+		<Bacterie />
 	</e>
 </resource>

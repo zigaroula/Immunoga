@@ -8,7 +8,7 @@ package {
 	import com.ktm.genome.resource.component.TextureResource;
 	import com.lip6.genome.geography.move.component.Speed;
 	import com.lip6.genome.geography.move.component.TargetPos;
-	//import components.Ship;
+	import components.SystemeImmunitaire.Macrophage;
 	
 	public class EntityFactory {
 		static public function createResourcedEntity(em:IEntityManager, _source:String, _id:String):void {
@@ -25,6 +25,7 @@ package {
 			em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );
 			em.addComponent (e, Speed, { velocity:10 } );
 			em.addComponent (e, TargetPos, { x: _x, y:0 } );
+			em.addComponent (e, Macrophage);
 		}
 	}
 }
