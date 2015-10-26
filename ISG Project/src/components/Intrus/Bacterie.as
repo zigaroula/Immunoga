@@ -4,6 +4,7 @@ package components.Intrus {
 	
 	public class Bacterie extends Component {
 		
+		public var direction:Number;
 		
 	}
 
