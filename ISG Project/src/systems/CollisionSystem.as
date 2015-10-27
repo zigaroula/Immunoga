@@ -75,11 +75,16 @@ package systems {
 			}
 		}
 		
-		static private var deltax:Number = 15;
+		static private var deltax:Number = 25;
 		static private var deltay:Number = 5;			
 		private function collision(ta:Transform, tb:Transform):Boolean {
 			//trace("COMPARING" + ta.x + tb.x + "  " + ta.y + tb.y );
-			return ( (Math.abs(ta.x - tb.x) < deltax) && (Math.abs(ta.y - tb.y) < deltay) );
+			var x1:int = ta.x + 50 / 2;
+			var y1:int = ta.y + 50 / 2;
+			
+			var x2:int = tb.x ;
+			var y2:int = tb.y ;
+			return ( (Math.abs(x1 - x2) < deltax) && (Math.abs(y1 - y2) < deltay) );
 		}
 	}
 }
