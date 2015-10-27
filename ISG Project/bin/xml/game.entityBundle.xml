@@ -7,7 +7,10 @@
 	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
 	<a name="TargetPos" class="com.lip6.genome.geography.move.component.TargetPos" />
 	<a name="Speed" class="com.lip6.genome.geography.move.component.Speed" />
+	
+	<a name="SIEntity" class="components.SIEntity" />
 	<a name="Bacterie" class="components.Intrus.Bacterie" />
+	
 	<a name="Ship" class="components.Game.Ship" />
 	<a name="Background" class="components.Game.Background" />
 	<a name="Spawn" class="components.Game.Spawn" />
@@ -44,6 +47,7 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
+		<SIEntity hp="5" />
 		<Spawn timer="1000" />
 	</e>
 	
@@ -54,6 +58,7 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
+		<SIEntity hp="5" />
 		<Spawn timer="6000" />
 	</e>
 	<e>
@@ -63,6 +68,7 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
+		<SIEntity hp="5" />
 		<Spawn timer="6000" />
 	</e>
 	<e>
@@ -72,6 +78,7 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
+		<SIEntity hp="5" />
 		<Spawn timer="6000" />
 	</e>
 	
@@ -82,6 +89,7 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
+		<SIEntity hp="5" />
 		<Spawn timer="15000" />
 	</e>
 	<e>
@@ -91,6 +99,7 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
+		<SIEntity hp="5" />
 		<Spawn timer="15000" />
 	</e>
 	

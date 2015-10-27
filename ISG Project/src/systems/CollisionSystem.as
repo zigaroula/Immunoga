@@ -1,5 +1,6 @@
 package systems {
 	
+	import com.ktm.genome.core.data.component.IComponentMapper;
 	import com.ktm.genome.core.entity.family.Family;
 	import com.ktm.genome.core.logic.system.System;
 	import components.Game.Ship;
@@ -12,6 +13,7 @@ package systems {
 		
 		private var targetMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
+		private var siMapper:IComponentMapper;
 		
 		import com.ktm.genome.core.entity.family.matcher.allOfGenes;
 		import com.ktm.genome.core.entity.family.matcher.noneOfGenes;
@@ -26,6 +28,7 @@ package systems {
 		import components.Game.Spawn;
 		import components.SystemeImmunitaire.Macrophage;
 		import components.Intrus.Bacterie;
+		import components.SIEntity;
 		
 		
 		override protected function onConstructed():void {
@@ -40,6 +43,7 @@ package systems {
 
 			transformMapper = geneManager.getComponentMapper(Transform);
 			targetMapper = geneManager.getComponentMapper(TargetPos);
+			siMapper = geneManager.getComponentMapper(SIEntity);
 		}
 		
 		override protected function onProcess(delta:Number):void
@@ -50,6 +54,7 @@ package systems {
 				
 				var tr:Transform = transformMapper.getComponent(e);
 				var target:TargetPos = targetMapper.getComponent(e);
+				var si:SIEntity = siMapper.getComponent(e);
 				
 				//top border->kill
 				if (tr.y == -50)
@@ -73,8 +78,13 @@ package systems {
 				for (var j:int = 0; j < n2 ; j++) {
 					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
-					if (collision(ta, tb))
-						entityManager.killEntity(b);
+					if (collision(ta, tb)) {
+						var si:SIEntity = siMapper.getComponent(b);
+						
+						si.hp -= 3;
+						if(si.hp < 0)
+							entityManager.killEntity(b);
+					}
 				}
 			}
 		}
