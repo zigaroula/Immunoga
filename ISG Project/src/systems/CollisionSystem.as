@@ -14,6 +14,7 @@ package systems {
 		private var transformMapper:IComponentMapper;
 		
 		import com.ktm.genome.core.entity.family.matcher.allOfGenes;
+		import com.ktm.genome.core.entity.family.matcher.noneOfGenes;
 		import com.ktm.genome.core.data.component.IComponentMapper;
 		import com.ktm.genome.core.entity.family.Family;
 		import com.ktm.genome.core.entity.IEntity;
@@ -22,17 +23,20 @@ package systems {
 		import com.lip6.genome.geography.move.component.TargetPos;
 		
 		import components.Game.Ship;
+		import components.Game.Spawn;
 		import components.SystemeImmunitaire.Macrophage;
 		import components.Intrus.Bacterie;
+		
 		
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
 			ships = entityManager.getFamily(allOfGenes(Ship));
 			
-			movingEntities = entityManager.getFamily(allOfGenes(Transform, TargetPos));
-			macrophages = entityManager.getFamily(allOfGenes(Macrophage));
-			bacteries = entityManager.getFamily(allOfGenes(Bacterie));
+			movingEntities	= entityManager.getFamily(allOfGenes(	Transform, TargetPos ),	noneOfGenes(Spawn));
+			
+			macrophages	= entityManager.getFamily(allOfGenes(	Macrophage ),						noneOfGenes(Spawn));
+			bacteries			= entityManager.getFamily(allOfGenes(	Bacterie	),								noneOfGenes(Spawn));
 
 			transformMapper = geneManager.getComponentMapper(Transform);
 			targetMapper = geneManager.getComponentMapper(TargetPos);

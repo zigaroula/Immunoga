@@ -10,6 +10,7 @@
 	<a name="Bacterie" class="components.Intrus.Bacterie" />
 	<a name="Ship" class="components.Game.Ship" />
 	<a name="Background" class="components.Game.Background" />
+	<a name="Spawn" class="components.Game.Spawn" />
 
 	<!-- Définition des entités -->
 	<!-- entité 1 -->
@@ -17,17 +18,15 @@
 		<Transform x="0" y="0" />
 		<Layer id="gameLayer" index="1" />
 	</e>
-	
-		<e>
+	<e>
 		<Transform x="0" y="0" />
 		<Layer id="background" index="0" />
 		<Background />
 	</e>
-	
 	<e>
 		<Transform x="0" y="-720" />
 		<Layered layerId="background" />
-		<TextureResource source="pictures/doge.png" id="background"  repeat="on" />
+		<TextureResource source="pictures/doge.png" id="background"  />
 	</e>
 	
 	<e>
@@ -39,23 +38,60 @@
 	</e>
 	
 	<e>
-		<Transform x="100" y="10" rotation="90" />
+		<Transform x="100" y="10" rotation="90" visible="false" />
 		<TargetPos x="100" y="20" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
-		
+		<Spawn timer="1000" />
 	</e>
 	
 	<e>
-		<Transform x="300" y="10" rotation="90" />
-		<TargetPos x="300" y="20" />
+		<Transform x="100" y="10" rotation="90" visible="false" />
+		<TargetPos x="50" y="20" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" />
-		
+		<Spawn timer="6000" />
 	</e>
-
+	<e>
+		<Transform x="200" y="10" rotation="90" visible="false" />
+		<TargetPos x="150" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" />
+		<Spawn timer="6000" />
+	</e>
+	<e>
+		<Transform x="350" y="10" rotation="90" visible="false" />
+		<TargetPos x="380" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" />
+		<Spawn timer="6000" />
+	</e>
+	
+		<e>
+		<Transform x="350" y="10" rotation="90" visible="false" />
+		<TargetPos x="100" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" />
+		<Spawn timer="15000" />
+	</e>
+	<e>
+		<Transform x="400" y="10" rotation="90" visible="false" />
+		<TargetPos x="100" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" />
+		<Spawn timer="15000" />
+	</e>
+	
 </resource>

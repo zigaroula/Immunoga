@@ -12,6 +12,7 @@ package {
 	import flash.events.Event;	
 	import systems.ControllerSystem;
 	import systems.BackgroundSystem;
+	import systems.SpawnSystem;
 	
 	import flash.events.MouseEvent;
 	import flash.events.KeyboardEvent;
@@ -36,6 +37,7 @@ package {
 			sm.setSystem(ResourceManager).setProcess(ProcessPhase.TICK, int.MAX_VALUE);
 			sm.setSystem(new RenderSystem(this)).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(MoveToSystem).setProcess(ProcessPhase.FRAME);
+			sm.setSystem(SpawnSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(CollisionSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(BackgroundSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(new ControllerSystem(stage)).setProcess(ProcessPhase.FRAME);
