@@ -4,11 +4,30 @@ package systems {
 	import com.ktm.genome.core.entity.family.Family;
 	import com.ktm.genome.core.logic.system.System;
 	import components.Game.Ship;
+	import org.swiftsuspenders.typedescriptions.ConstructorInjectionPoint;
 	
 	public class CollisionSystem extends System {
 		private var movingEntities:Family;
+		
+		//def
 		private var macrophages:Family;
+		
+		private var acBact:Family;
+		private var acVir:Family;
+		
+		private var lymphB:Family;
+		private var lymphBBact:Family;
+		private var lymphBVir:Family;
+		
+		private var lymphT:Family;
+		
+		//intrus
 		private var bacteries:Family;
+		private var dechets:Family;
+		private var toxines:Family;
+		private var virus:Family;
+		
+		//
 		private var ships:Family;
 		
 		private var targetMapper:IComponentMapper;
@@ -26,8 +45,23 @@ package systems {
 		
 		import components.Game.Ship;
 		import components.Game.Spawn;
-		import components.SystemeImmunitaire.Macrophage;
 		import components.Intrus.Bacterie;
+		import components.Intrus.Dechet;
+		import components.Intrus.Toxine;
+		import components.Intrus.Virus;
+		
+		import components.SystemeImmunitaire.Macrophage;
+		import components.SystemeImmunitaire.AnticorpsBacterien;
+		import components.SystemeImmunitaire.AnticorpsViral;
+		import components.SystemeImmunitaire.CelluleStructure;
+		import components.SystemeImmunitaire.LymphocyteB;
+		import components.SystemeImmunitaire.LymphocyteBBacterien;
+		import components.SystemeImmunitaire.LymphocyteBViral;
+		import components.SystemeImmunitaire.LymphocyteT;
+		import components.SystemeImmunitaire.CelluleStructure;
+
+
+
 		import components.SIEntity;
 		
 		
@@ -36,10 +70,27 @@ package systems {
 			
 			ships = entityManager.getFamily(allOfGenes(Ship));
 			
-			movingEntities	= entityManager.getFamily(allOfGenes(	Transform, TargetPos ),	noneOfGenes(Spawn));
+			movingEntities	= entityManager.getFamily(allOfGenes(	Transform, TargetPos ),		noneOfGenes(Spawn));
 			
-			macrophages	= entityManager.getFamily(allOfGenes(	Macrophage ),						noneOfGenes(Spawn));
-			bacteries			= entityManager.getFamily(allOfGenes(	Bacterie	),								noneOfGenes(Spawn));
+			macrophages = entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Macrophage ));
+		
+			acBact			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(AnticorpsBacterien ));
+			acVir				=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(AnticorpsViral ));
+		
+			lymphB			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(LymphocyteB ));
+			lymphBBact	=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(LymphocyteBBacterien ));
+			lymphBVir		=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(LymphocyteBViral ));
+		
+			lymphT			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(LymphocyteT ));
+		
+			bacteries		=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Bacterie ));
+			dechets			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Dechet ));
+			toxines			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Toxine ));
+			virus				=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Virus ));
+		
+			
+			
+			
 
 			transformMapper = geneManager.getComponentMapper(Transform);
 			targetMapper = geneManager.getComponentMapper(TargetPos);
@@ -57,17 +108,22 @@ package systems {
 				var si:SIEntity = siMapper.getComponent(e);
 				
 				//top border->kill
-				if (tr.y == -50)
+				if (tr.y == -50 || tr.y > 900 || tr.x < - 10 || tr.x > 500)
 					entityManager.killEntity(e);	
 			}
 
-			processCollisions(macrophages, bacteries);
+			processCollisions(macrophages, bacteries, aDamagesB);
+			
+			//processCollisions(lymphB, bacteries);
+			//processCollisions(lymphocitesB, 
+			
+			//processCollisions(anticorps
 			//macrophage bacterie			
 			
 		}
  
 		//f1-f2 -> delete f2
-		private function processCollisions( f1:Family, f2:Family):void {
+		private function processCollisions( f1:Family, f2:Family, interaction:Function):void {
 			var n1:int = f1.members.length;
 			var n2:int = f2.members.length;
 						
@@ -79,11 +135,7 @@ package systems {
 					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
 					if (collision(ta, tb)) {
-						var si:SIEntity = siMapper.getComponent(b);
-						
-						si.hp -= 3;
-						if(si.hp < 0)
-							entityManager.killEntity(b);
+						interaction(a, b);
 					}
 				}
 			}
@@ -99,6 +151,15 @@ package systems {
 			var x2:int = tb.x ;
 			var y2:int = tb.y ;
 			return ( (Math.abs(x1 - x2) < deltax) && (Math.abs(y1 - y2) < deltay) );
+		}
+		
+		private function aDamagesB(a:IEntity, b:IEntity) :void{
+			var si:SIEntity = siMapper.getComponent(b);
+				entityManager.killEntity(a);
+				
+				si.hp -= 3;
+				if(si.hp < 0)
+					entityManager.killEntity(b);
 		}
 	}
 }
