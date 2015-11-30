@@ -22,7 +22,7 @@
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="5" />
 		<Spawn timer="1000" />
 	</e>
@@ -33,7 +33,7 @@
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="5" />
 		<Spawn timer="6000" />
 	</e>
@@ -43,7 +43,7 @@
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="5" />
 		<Spawn timer="6000" />
 	</e>
@@ -53,7 +53,7 @@
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="5" />
 		<Spawn timer="6000" />
 	</e>
@@ -64,7 +64,7 @@
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="5" />
 		<Spawn timer="15000" />
 	</e>
@@ -74,7 +74,7 @@
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="5" />
 		<Spawn timer="15000" />
 	</e>

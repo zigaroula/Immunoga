@@ -6,6 +6,8 @@ package components.Intrus {
 		
 		public var direction:Number;
 		
+		public var timer:Number;
+		public var maxTimer:Number;
 	}
 
 }

@@ -12,6 +12,8 @@ package {
 	import components.SystemeImmunitaire.LymphocyteB;
 	import components.SystemeImmunitaire.LymphocyteT;
 	
+	import components.Intrus.Toxine;
+	
 	public class EntityFactory {
 		static public function createResourcedEntity(em:IEntityManager, _source:String, _id:String):void {
 			// Creation d'une entité vide
@@ -50,6 +52,16 @@ package {
 					em.addComponent (e, LymphocyteT, { } );
 					break;
 			}
+		}
+		
+		static public function createToxine(em:IEntityManager, _x:int, _y:int, tarX:int, tarY:int):void {
+			var e:IEntity = em.create();
+			em.addComponent (e, Transform, {x:_x, y:_y} );
+			em.addComponent (e, Layered, { layerId:"gameLayer" } );
+			em.addComponent (e, Speed, { velocity:5 } );
+			em.addComponent (e, TargetPos, { x: tarX, y: tarY } );
+			em.addComponent (e, TextureResource, { source:"pictures/toxin.png", id:"toxine" } );
+			em.addComponent (e, Toxine, { } );
 		}
 	}
 }
