@@ -99,7 +99,7 @@ package systems {
 		
 		override protected function onProcess(delta:Number):void
 		{
-			var familySize:int = movingEntities.members.length; 
+			var familySize:int = movingEntities.members.length;
 			for (var i:int = 0 ; i < familySize ; i++) {
 				var e:IEntity = movingEntities.members[i];
 				
@@ -108,8 +108,8 @@ package systems {
 				var si:SIEntity = siMapper.getComponent(e);
 				
 				//top border->kill
-				if (tr.y == -50 || tr.y > 900 || tr.x < - 10 || tr.x > 500)
-					entityManager.killEntity(e);	
+				if (tr.y == -50 || tr.y > 730 || tr.x < - 10 || tr.x > 500)
+					entityManager.killEntity(e);
 			}
 
 			processCollisions(macrophages, bacteries, aDamagesB);

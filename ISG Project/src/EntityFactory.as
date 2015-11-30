@@ -58,7 +58,7 @@ package {
 			var e:IEntity = em.create();
 			em.addComponent (e, Transform, {x:_x, y:_y} );
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
-			em.addComponent (e, Speed, { velocity:5 } );
+			em.addComponent (e, Speed, { velocity:2 } );
 			em.addComponent (e, TargetPos, { x: tarX, y: tarY } );
 			em.addComponent (e, TextureResource, { source:"pictures/toxin.png", id:"toxine" } );
 			em.addComponent (e, Toxine, { } );
