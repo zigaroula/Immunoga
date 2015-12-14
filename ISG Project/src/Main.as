@@ -14,6 +14,7 @@ package {
 	import systems.BackgroundSystem;
 	import systems.SpawnSystem;
 	import systems.BacterieSpawnSystem;
+	import systems.HpSystem
 	
 	import flash.events.MouseEvent;
 	import flash.events.KeyboardEvent;
@@ -45,6 +46,8 @@ package {
 			sm.setSystem(new ControllerSystem(stage)).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(RandomMovingSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(BacterieSpawnSystem).setProcess(ProcessPhase.FRAME);
+			sm.setSystem(HpSystem).setProcess(ProcessPhase.FRAME);
+
 			//start
 			
 			var level:int = 0;

@@ -30,6 +30,11 @@ package systems {
 		//
 		private var ships:Family;
 		
+		//infect
+		private var celStruct:Family;
+		private var celStructInf:Family;
+		private var bactInf :Family;
+
 		private var targetMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
 		private var siMapper:IComponentMapper;
@@ -60,10 +65,8 @@ package systems {
 		import components.SystemeImmunitaire.LymphocyteT;
 		import components.SystemeImmunitaire.CelluleStructure;
 
-
-
 		import components.SIEntity;
-		
+		import components.Infection;
 		
 		override protected function onConstructed():void {
 			super.onConstructed();
@@ -87,9 +90,13 @@ package systems {
 			dechets			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Dechet ));
 			toxines			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Toxine ));
 			virus				=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Virus ));
-		
 			
-			
+			celStruct		=	entityManager.getFamily(noneOfGenes(Spawn, Infection), 	allOfGenes(CelluleStructure ));
+
+			celStructInf    = entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(CelluleStructure, Infection ));
+			bactInf    = entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(CelluleStructure, Infection ));
+
+
 			
 
 			transformMapper = geneManager.getComponentMapper(Transform);
@@ -112,18 +119,36 @@ package systems {
 					entityManager.killEntity(e);
 			}
 
-			processCollisions(macrophages, bacteries, aDamagesB);
+			processCollisions(macrophages, bacteries, aDamagesB, 49);
+			processCollisions(macrophages, toxines, aDamagesB, 100);
+			processCollisions(macrophages, dechets, aDamagesB, 100);
+			processCollisions(macrophages, dechets, aDamagesB, 100);
 			
-			//processCollisions(lymphB, bacteries);
-			//processCollisions(lymphocitesB, 
+			processCollisions(lymphB, bacteries, aSpecializes, 1);
+			processCollisions(lymphB, virus, aSpecializes, 2);
 			
-			//processCollisions(anticorps
-			//macrophage bacterie			
+			processCollisions(lymphBBact, bacteries, aDamagesB, 100);
+			processCollisions(lymphBVir, virus, aDamagesB, 100);
 			
+			//processCollisions(lymphT, //CelluleStructureInf, aDamagesB, 100);
+			//processCollisions(lymphT, //bacteriesInf, aDamagesB, 1);
+			
+			//processCollisions(toxines, //CelluleStructure, aDamagesB, 1);
+
+			processCollisions(virus, bacteries, aInfectsB, 1);
+			processCollisions(virus, macrophages, aInfectsB, 1);
+			processCollisions(virus, lymphT, aInfectsB, 1);
+			//processCollisions(virus, CelluleStruct, aInfectsB, 1);
+			processCollisions(virus, lymphBBact, aInfectsB, 1);
+
+			//processCollisions(toxines, //CelluleStructure, aDamagesB, 1);
+			processCollisions(toxines, lymphB, aDamagesB, 40);
+			processCollisions(toxines, lymphBBact, aDamagesB, 40);
+			processCollisions(toxines, lymphBVir, aDamagesB, 40);			
 		}
  
 		//f1-f2 -> delete f2
-		private function processCollisions( f1:Family, f2:Family, interaction:Function):void {
+		private function processCollisions( f1:Family, f2:Family, interaction:Function, attr:int):void {
 			var n1:int = f1.members.length;
 			var n2:int = f2.members.length;
 						
@@ -135,7 +160,7 @@ package systems {
 					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
 					if (collision(ta, tb)) {
-						interaction(a, b);
+						interaction(a, b, attr);
 					}
 				}
 			}
@@ -153,13 +178,21 @@ package systems {
 			return ( (Math.abs(x1 - x2) < deltax) && (Math.abs(y1 - y2) < deltay) );
 		}
 		
-		private function aDamagesB(a:IEntity, b:IEntity) :void{
+		private function aDamagesB(a:IEntity, b:IEntity, dmg:int) :void{
 			var si:SIEntity = siMapper.getComponent(b);
 				entityManager.killEntity(a);
 				
-				si.hp -= 3;
+				si.hp -= dmg;
 				if(si.hp < 0)
 					entityManager.killEntity(b);
+		}
+		
+		private function aSpecializes(a:IEntity, b:IEntity, dmg:int) :void{
+			//TODO
+		}
+		
+		private function aInfectsB(a:IEntity, b:IEntity, dmg:int) :void{
+			//TODO
 		}
 	}
 }

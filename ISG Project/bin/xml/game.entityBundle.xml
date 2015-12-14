@@ -29,7 +29,7 @@
 	<e>
 		<Transform x="0" y="-720" />
 		<Layered layerId="background" />
-		<TextureResource source="pictures/doge.png" id="background"  />
+		<TextureResource source="pictures/background.png" id="background"  />
 	</e>
 	
 	<e>

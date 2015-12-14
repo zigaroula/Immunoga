@@ -11,6 +11,7 @@ package {
 	import components.SystemeImmunitaire.Macrophage;
 	import components.SystemeImmunitaire.LymphocyteB;
 	import components.SystemeImmunitaire.LymphocyteT;
+	import components.SIEntity;
 	
 	import components.Intrus.Toxine;
 	
@@ -38,6 +39,7 @@ package {
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
 			em.addComponent (e, Speed, { velocity:10 } );
 			em.addComponent (e, TargetPos, { x: _x, y: -50 } );
+			em.addComponent (e, SIEntity, {hp: 100 } );
 			switch(_type) {
 				case Global.MACROPHAGE:
 					em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );
@@ -59,6 +61,7 @@ package {
 			em.addComponent (e, Transform, {x:_x, y:_y} );
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
 			em.addComponent (e, Speed, { velocity:2 } );
+			em.addComponent (e, SIEntity, { hp:100 } );
 			em.addComponent (e, TargetPos, { x: tarX, y: tarY } );
 			em.addComponent (e, TextureResource, { source:"pictures/toxin.png", id:"toxine" } );
 			em.addComponent (e, Toxine, { } );
