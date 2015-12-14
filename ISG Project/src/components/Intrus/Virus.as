@@ -4,7 +4,7 @@ package components.Intrus {
 	
 	public class Virus extends Component {
 		
-		
+		public var direction:Number;
 	}
 
 }

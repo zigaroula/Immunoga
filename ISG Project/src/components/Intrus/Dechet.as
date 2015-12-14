@@ -4,7 +4,7 @@ package components.Intrus {
 	
 	public class Dechet extends Component {
 		
-		
+		public var direction:Number;
 	}
 
 }

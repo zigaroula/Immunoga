@@ -42,17 +42,17 @@ package systems {
 				if (tr.visible) {
 					b.timer -= delta;
 				}
-					
+				
 				if (b.timer < 0) {
 					b.timer = b.maxTimer;
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x, tr.y + 1000		  );
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x + 1000, tr.y       );
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x       , tr.y - 1000);
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x - 1000, tr.y       );
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x + 1000, tr.y + 1000);
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x + 1000, tr.y - 1000);
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x - 1000, tr.y - 1000);
-					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x - 1000, tr.y + 1000);
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x, tr.y + 150		  );
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x + 150, tr.y       );
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x       , tr.y - 150);
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x - 150, tr.y       );
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x + 150, tr.y + 150);
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x + 150, tr.y - 150);
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x - 150, tr.y - 150);
+					EntityFactory.createToxine(entityManager, tr.x, tr.y, tr.x - 150, tr.y + 150);
 				}
 				
 			}
