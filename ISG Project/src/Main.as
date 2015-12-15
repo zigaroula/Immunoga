@@ -41,13 +41,12 @@ package {
 			sm.setSystem(new RenderSystem(this)).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(MoveToSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(SpawnSystem).setProcess(ProcessPhase.FRAME);
-			sm.setSystem(CollisionSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(BackgroundSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(new ControllerSystem(stage)).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(RandomMovingSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(BacterieSpawnSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(HpSystem).setProcess(ProcessPhase.FRAME);
-
+			sm.setSystem(CollisionSystem).setProcess(ProcessPhase.FRAME);
 			//start
 			
 			var level:int = 0;

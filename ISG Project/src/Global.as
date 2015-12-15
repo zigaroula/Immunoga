@@ -8,6 +8,8 @@ package {
 		public static const LYMPHBBACT:int = 1003;
 		public static const LYMPHBVIR:int = 1004;
 		
+		public static const CELSTRUCT:int = 1005;
+		public static const BACTERIE:int = 1006;
 	}
 
 }

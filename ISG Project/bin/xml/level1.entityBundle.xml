@@ -10,6 +10,7 @@
 	
 	<a name="SIEntity" class="components.SIEntity" />
 	<a name="Bacterie" class="components.Intrus.Bacterie" />
+	<a name="Virus" class="components.Intrus.Virus" />
 	
 	<a name="Ship" class="components.Game.Ship" />
 	<a name="Background" class="components.Game.Background" />
@@ -23,6 +24,16 @@
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="1000" />
+	</e>
+	
+	<e>
+		<Transform x="100" y="400" rotation="90" visible="false"  alpha="1"/>
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus />
 		<SIEntity hp="100" />
 		<Spawn timer="1000" />
 	</e>
