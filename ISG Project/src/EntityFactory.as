@@ -11,6 +11,8 @@ package {
 	import components.SystemeImmunitaire.Macrophage;
 	import components.SystemeImmunitaire.LymphocyteB;
 	import components.SystemeImmunitaire.LymphocyteT;
+	import components.SystemeImmunitaire.LymphocyteBBacterien;
+	import components.SystemeImmunitaire.LymphocyteBViral;
 	import components.SIEntity;
 	
 	import components.Intrus.Toxine;
@@ -52,6 +54,14 @@ package {
 				case Global.LYMPHOCYTET:
 					em.addComponent (e, TextureResource, { source:"pictures/tCell.png", id:"lymphocytet" } );
 					em.addComponent (e, LymphocyteT, { } );
+					break;
+				case Global.LYMPHBBACT:
+					em.addComponent (e, TextureResource, { source:"pictures/lymphBBact.png", id:"lymphBBact" } );
+					em.addComponent (e, LymphocyteBBacterien, { } );
+					break;
+				case Global.LYMPHBVIR:
+					em.addComponent (e, TextureResource, { source:"pictures/lymphBVir.png", id:"lymphBVir" } );
+					em.addComponent (e, LymphocyteBViral, { } );
 					break;
 			}
 		}
