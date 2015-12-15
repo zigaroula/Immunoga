@@ -123,36 +123,36 @@ package systems {
 					entityManager.killEntity(e);
 			}
 			
-			processCollisions(macrophages, bacteries, aDamagesB, 49);
-			processCollisions(macrophages, toxines, aDamagesB, 100);
-			processCollisions(macrophages, dechets, aDamagesB, 100);
-			processCollisions(macrophages, dechets, aDamagesB, 100);
+			processCollisions(0, macrophages, bacteries, aDamagesB, 49);
+			processCollisions(0, macrophages, toxines, aDamagesB, 100);
+			processCollisions(0, macrophages, dechets, aDamagesB, 100);
+			processCollisions(0, macrophages, dechets, aDamagesB, 100);
 			
-			processCollisions(lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
-			processCollisions(lymphB, virus, aSpecializes, Global.LYMPHBVIR);
+			processCollisions(20, lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
+			processCollisions(20, lymphB, virus, aSpecializes, Global.LYMPHBVIR);
 			
-			processCollisions(lymphBBact, bacteries, aDamagesB, 100);
-			processCollisions(lymphBVir, virus, aDamagesB, 100);
+			processCollisions(0, lymphBBact, bacteries, aDamagesB, 80);
+			processCollisions(0, lymphBVir, virus, aDamagesB, 80);
 			
-			processCollisions(lymphT, celStructInf, aDamagesB, 100);
-			processCollisions(lymphT, bactInf, aDamagesB, 1);
+			processCollisions(0, lymphT, celStructInf, aDamagesB, 100);
+			processCollisions(0, lymphT, bactInf, aDamagesB, 1);
 			
-			processCollisions(toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, toxines, celStruct, aDamagesB, 1);
 			
-			processCollisions(virus, bacteries, aInfectsB, 1);
-			processCollisions(virus, macrophages, aInfectsB, 1);
-			processCollisions(virus, lymphT, aInfectsB, 1);
-			processCollisions(virus, celStruct, aInfectsB, 1);
-			processCollisions(virus, lymphBBact, aInfectsB, 1);
+			processCollisions(0, virus, bacteries, aInfectsB, 1);
+			processCollisions(0, virus, macrophages, aInfectsB, 1);
+			processCollisions(0, virus, lymphT, aInfectsB, 1);
+			processCollisions(0, virus, celStruct, aInfectsB, 1);
+			processCollisions(0, virus, lymphBBact, aInfectsB, 1);
 			
-			processCollisions(toxines, celStruct, aDamagesB, 1);
-			processCollisions(toxines, lymphB, aDamagesB, 10);
-			processCollisions(toxines, lymphBBact, aDamagesB, 10);
-			processCollisions(toxines, lymphBVir, aDamagesB, 10);			
+			processCollisions(0, toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, toxines, lymphB, aDamagesB, 10);
+			processCollisions(0, toxines, lymphBBact, aDamagesB, 10);
+			processCollisions(0, toxines, lymphBVir, aDamagesB, 10);			
 		}
  
 		//f1-f2 -> delete f2
-		private function processCollisions( f1:Family, f2:Family, interaction:Function, attr:int):void {
+		private function processCollisions(range:int, f1:Family, f2:Family, interaction:Function, attr:int):void {
 			var n1:int = f1.members.length;
 			var n2:int = f2.members.length;
 			
@@ -163,7 +163,7 @@ package systems {
 				for (var j:int = 0; j < n2 ; j++) {
 					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
-					if (collision(ta, tb)) {
+					if (collision(range, ta, tb)) {
 						interaction(a, b, attr);
 					}
 				}
@@ -172,19 +172,19 @@ package systems {
 		
 		static private var deltax:Number = 25;
 		static private var deltay:Number = 5;			
-		private function collision(ta:Transform, tb:Transform):Boolean {
+		private function collision(range:int, ta:Transform, tb:Transform):Boolean {
 			//trace("COMPARING" + ta.x + tb.x + "  " + ta.y + tb.y );
 			var x1:int = ta.x + 50 / 2;
 			var y1:int = ta.y + 50 / 2;
 			
 			var x2:int = tb.x ;
 			var y2:int = tb.y ;
-			return ( (Math.abs(x1 - x2) < deltax) && (Math.abs(y1 - y2) < deltay) );
+			return ( (Math.abs(x1 - x2) < (deltax+range)) && (Math.abs(y1 - y2) < (deltay+range)) );
 		}
 		
 		private function aDamagesB(a:IEntity, b:IEntity, dmg:int) :void{
 			var si:SIEntity = siMapper.getComponent(b);
-				entityManager.killEntity(a);
+				//entityManager.killEntity(a);
 				
 				si.hp -= dmg;
 				if(si.hp < 0)
@@ -198,7 +198,7 @@ package systems {
 			var y:int = tr.y;
 				
 			entityManager.killEntity(a);
-			EntityFactory.createEntityOfType(entityManager, x-25, y, type);	
+			EntityFactory.createEntityOfType(entityManager, x-25, y+10, type);	
 		}
 		
 		private function aInfectsB(a:IEntity, b:IEntity, dmg:int) :void{
