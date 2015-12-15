@@ -1,18 +1,19 @@
 package systems {
-import com.ktm.genome.core.data.component.IComponent;
-import com.ktm.genome.core.logic.system.System;
-import com.ktm.genome.core.entity.family.matcher.allOfGenes;
-import com.ktm.genome.core.entity.family.matcher.noneOfGenes;
-import com.ktm.genome.core.data.component.IComponentMapper;
-import com.ktm.genome.core.entity.family.Family;
-import com.ktm.genome.core.entity.IEntity;
-import com.ktm.genome.render.component.Transform;
-import com.lip6.genome.geography.move.component.TargetPos;
-import components.Intrus.Bacterie;
-import components.Intrus.Virus;
-import components.Intrus.Toxine;
-import components.Intrus.Dechet;
-import components.Game.Spawn;
+	
+	import com.ktm.genome.core.data.component.IComponent;
+	import com.ktm.genome.core.logic.system.System;
+	import com.ktm.genome.core.entity.family.matcher.allOfGenes;
+	import com.ktm.genome.core.entity.family.matcher.noneOfGenes;
+	import com.ktm.genome.core.data.component.IComponentMapper;
+	import com.ktm.genome.core.entity.family.Family;
+	import com.ktm.genome.core.entity.IEntity;
+	import com.ktm.genome.render.component.Transform;
+	import com.lip6.genome.geography.move.component.TargetPos;
+	import components.Intrus.Bacterie;
+	import components.Intrus.Virus;
+	import components.Intrus.Toxine;
+	import components.Intrus.Dechet;
+	import components.Game.Spawn;
 	
 	public class RandomMovingSystem extends System {
 		
@@ -38,8 +39,6 @@ import components.Game.Spawn;
 		}
 		
 		override protected function onProcess(delta:Number):void {
-
-			
 			//Bacteries
 			var familySize:int = movingBacteries.members.length;
 			for (var i:int = 0 ; i < familySize ; i++) {
@@ -156,7 +155,7 @@ import components.Game.Spawn;
 					angle = Math.round(Math.random() * 10);
 					if (Math.random() < 0.5) dechet.direction = 90 + angle;
 					else dechet.direction = 90 - angle;
-										
+					
 					angleRad = dechet.direction * Math.PI / 180;
 					tan = Math.random() * 200;
 					

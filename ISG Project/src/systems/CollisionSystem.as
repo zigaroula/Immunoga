@@ -3,8 +3,36 @@ package systems {
 	import com.ktm.genome.core.data.component.IComponentMapper;
 	import com.ktm.genome.core.entity.family.Family;
 	import com.ktm.genome.core.logic.system.System;
-	import components.Game.Ship;
 	import org.swiftsuspenders.typedescriptions.ConstructorInjectionPoint;
+	
+	import com.ktm.genome.core.entity.family.matcher.allOfGenes;
+	import com.ktm.genome.core.entity.family.matcher.noneOfGenes;
+	import com.ktm.genome.core.data.component.IComponentMapper;
+	import com.ktm.genome.core.entity.family.Family;
+	import com.ktm.genome.core.entity.IEntity;
+	import com.ktm.genome.core.logic.system.System;
+	import com.ktm.genome.render.component.Transform;
+	import com.lip6.genome.geography.move.component.TargetPos;
+	import com.ktm.genome.resource.component.TextureResource;
+	import com.ktm.genome.render.component.Layered;
+	
+	import components.Game.Ship;
+	import components.Game.Spawn;
+	import components.Intrus.Bacterie;
+	import components.Intrus.Dechet;
+	import components.Intrus.Toxine;
+	import components.Intrus.Virus;
+	
+	import components.SystemeImmunitaire.Macrophage;
+	import components.SystemeImmunitaire.CelluleStructure;
+	import components.SystemeImmunitaire.LymphocyteB;
+	import components.SystemeImmunitaire.LymphocyteBBacterien;
+	import components.SystemeImmunitaire.LymphocyteBViral;
+	import components.SystemeImmunitaire.LymphocyteT;
+	import components.SystemeImmunitaire.CelluleStructure;
+
+	import components.SIEntity;
+	import components.Infection;
 	
 	public class CollisionSystem extends System {
 		private var movingEntities:Family;
@@ -27,7 +55,7 @@ package systems {
 		private var toxines:Family;
 		private var virus:Family;
 		
-		//
+		//game
 		private var ships:Family;
 		
 		//infect
@@ -45,41 +73,12 @@ package systems {
 		
 		private var layerMapper:IComponentMapper;
 		
-		import com.ktm.genome.core.entity.family.matcher.allOfGenes;
-		import com.ktm.genome.core.entity.family.matcher.noneOfGenes;
-		import com.ktm.genome.core.data.component.IComponentMapper;
-		import com.ktm.genome.core.entity.family.Family;
-		import com.ktm.genome.core.entity.IEntity;
-		import com.ktm.genome.core.logic.system.System;
-		import com.ktm.genome.render.component.Transform;
-		import com.lip6.genome.geography.move.component.TargetPos;
-		import com.ktm.genome.resource.component.TextureResource;
-		import com.ktm.genome.render.component.Layered;
-		
-		import components.Game.Ship;
-		import components.Game.Spawn;
-		import components.Intrus.Bacterie;
-		import components.Intrus.Dechet;
-		import components.Intrus.Toxine;
-		import components.Intrus.Virus;
-		
-		import components.SystemeImmunitaire.Macrophage;
-		import components.SystemeImmunitaire.CelluleStructure;
-		import components.SystemeImmunitaire.LymphocyteB;
-		import components.SystemeImmunitaire.LymphocyteBBacterien;
-		import components.SystemeImmunitaire.LymphocyteBViral;
-		import components.SystemeImmunitaire.LymphocyteT;
-		import components.SystemeImmunitaire.CelluleStructure;
-
-		import components.SIEntity;
-		import components.Infection;
-		
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
 			ships = entityManager.getFamily(allOfGenes(Ship));
 			
-			movingEntities	= entityManager.getFamily(allOfGenes(	Transform, TargetPos ),		noneOfGenes(Spawn));
+			movingEntities= entityManager.getFamily(allOfGenes(Transform, TargetPos ),	noneOfGenes(Spawn));
 			
 			macrophages = entityManager.getFamily(noneOfGenes(Spawn, Infection), 	allOfGenes(Macrophage ));
 		
@@ -90,29 +89,29 @@ package systems {
 			lymphT			=	entityManager.getFamily(noneOfGenes(Spawn, Infection), 	allOfGenes(LymphocyteT ));
 		
 			bacteries		=	entityManager.getFamily(noneOfGenes(Spawn, Infection), 	allOfGenes(Bacterie ));
-			dechets			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Dechet ));
-			toxines			=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Toxine ));
-			virus				=	entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Virus ));
+			dechets			=	entityManager.getFamily(noneOfGenes(Spawn), 				allOfGenes(Dechet ));
+			toxines			=	entityManager.getFamily(noneOfGenes(Spawn), 				allOfGenes(Toxine ));
+			virus				=	entityManager.getFamily(noneOfGenes(Spawn), 				allOfGenes(Virus ));
 			
 			celStruct		=	entityManager.getFamily(noneOfGenes(Spawn, Infection), 	allOfGenes(CelluleStructure ));
 		
-			celStructInf    = entityManager.getFamily(noneOfGenes(Spawn), 		allOfGenes(CelluleStructure, Infection ));
-			bactInf   		= entityManager.getFamily(noneOfGenes(Spawn), 		allOfGenes(CelluleStructure, Infection ));
+			celStructInf    = entityManager.getFamily(noneOfGenes(Spawn), 					allOfGenes(CelluleStructure, Infection ));
+			bactInf   		= entityManager.getFamily(noneOfGenes(Spawn), 					allOfGenes(CelluleStructure, Infection ));
 			
-			infected   		= entityManager.getFamily(noneOfGenes(Spawn, Layered), 		allOfGenes(Infection));
-
-
+			infected   		= entityManager.getFamily(noneOfGenes(Spawn, Layered), 	allOfGenes(Infection));
+		
 			transformMapper = geneManager.getComponentMapper(Transform);
-			targetMapper = geneManager.getComponentMapper(TargetPos);
-			siMapper = geneManager.getComponentMapper(SIEntity);
+			targetMapper 		= geneManager.getComponentMapper(TargetPos);
+			siMapper 			= geneManager.getComponentMapper(SIEntity);
 
-			textureMapper = geneManager.getComponentMapper(TextureResource);
-			lymphbMapper = geneManager.getComponentMapper(LymphocyteB);
-			layerMapper = geneManager.getComponentMapper(Layered);
+			textureMapper 	= geneManager.getComponentMapper(TextureResource);
+			lymphbMapper 	= geneManager.getComponentMapper(LymphocyteB);
+			layerMapper 		= geneManager.getComponentMapper(Layered);
 		}
 		
 		override protected function onProcess(delta:Number):void
 		{
+			//borders
 			var familySize:int = movingEntities.members.length;
 			for (var i:int = 0 ; i < familySize ; i++) {
 				var e:IEntity = movingEntities.members[i];
@@ -165,7 +164,7 @@ package systems {
 			}
 		}
  
-		//f1-f2 -> delete f2
+		//family f1 interacts with family f2 according to interaction function
 		private function processCollisions(range:int, f1:Family, f2:Family, interaction:Function, attr:int):void {
 			var n1:int = f1.members.length;
 			var n2:int = f2.members.length;
@@ -184,6 +183,7 @@ package systems {
 			}
 		}
 		
+		//returns "ta is in range of tb"
 		static private var deltax:Number = 25;
 		static private var deltay:Number = 5;			
 		private function collision(range:int, ta:Transform, tb:Transform):Boolean {

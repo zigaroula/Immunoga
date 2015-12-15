@@ -1,26 +1,23 @@
 package systems {
 	
+	import com.ktm.genome.core.entity.family.matcher.allOfGenes;
 	import com.ktm.genome.core.data.component.IComponentMapper;
 	import com.ktm.genome.core.entity.family.Family;
+	import com.ktm.genome.core.entity.IEntity;
 	import com.ktm.genome.core.logic.system.System;
+	import com.ktm.genome.render.component.Transform;
+	import com.lip6.genome.geography.move.component.TargetPos;
+	
 	import components.Game.Ship;
 	import components.Game.Spawn;
+	import components.Intrus.Bacterie;
+
 	
 	public class BacterieSpawnSystem extends System {
 		private var bacterieEntities:Family;
 		
 		private var bacterieMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
-		
-		import com.ktm.genome.core.entity.family.matcher.allOfGenes;
-		import com.ktm.genome.core.data.component.IComponentMapper;
-		import com.ktm.genome.core.entity.family.Family;
-		import com.ktm.genome.core.entity.IEntity;
-		import com.ktm.genome.core.logic.system.System;
-		import com.ktm.genome.render.component.Transform;
-		import com.lip6.genome.geography.move.component.TargetPos;
-		
-		import components.Intrus.Bacterie;
 		
 		override protected function onConstructed():void {
 			super.onConstructed();

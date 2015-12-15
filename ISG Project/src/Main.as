@@ -33,9 +33,11 @@ package {
 		
 		private function init(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
 			// entry point
 			world = BigBang.createWorld(stage);
 			var sm:ISystemManager = world.getSystemManager();
+			
 			//set systems
 			sm.setSystem(ResourceManager).setProcess(ProcessPhase.TICK, int.MAX_VALUE);
 			sm.setSystem(new RenderSystem(this)).setProcess(ProcessPhase.FRAME);
