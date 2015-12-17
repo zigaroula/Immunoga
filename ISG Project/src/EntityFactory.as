@@ -16,6 +16,7 @@ package {
 	import components.SIEntity;
 	
 	import components.Intrus.Toxine;
+	import components.Intrus.Dechet;
 	
 	public class EntityFactory {
 		static public function createResourcedEntity(em:IEntityManager, _source:String, _id:String):void {
@@ -75,6 +76,27 @@ package {
 			em.addComponent (e, TargetPos, { x: tarX, y: tarY } );
 			em.addComponent (e, TextureResource, { source:"pictures/toxin.png", id:"toxine" } );
 			em.addComponent (e, Toxine, { } );
+		}
+		
+		static public function createDechet(em:IEntityManager, _x:int, _y:int, tarX:int, tarY:int, type:int):void {
+		
+			var e:IEntity = em.create();
+			em.addComponent (e, Transform, {x:_x, y:_y} );
+			em.addComponent (e, Layered, { layerId:"gameLayer" } );
+			em.addComponent (e, Speed, { velocity:0.2 } );
+			em.addComponent (e, SIEntity, { hp:100 } );
+			em.addComponent (e, TargetPos, { x: tarX, y: tarY } );
+			
+			switch (type) {
+				case 1: em.addComponent (e, TextureResource, { source:"pictures/waste1.png", id:"waste1" } );
+					break;
+				case 2: em.addComponent (e, TextureResource, { source:"pictures/waste2.png", id:"waste2" } );
+					break;
+				case 3: em.addComponent (e, TextureResource, { source:"pictures/waste3.png", id:"waste3" } );
+					break;
+			}
+			
+			em.addComponent (e, Dechet, { } );
 		}
 	}
 }
