@@ -127,32 +127,32 @@ package systems {
 			
 			fixTextures(infected);
 			
-			processCollisions(0, macrophages, bacteries, aDamagesB, 49);
-			processCollisions(0, macrophages, toxines, aDamagesB, 100);
-			processCollisions(0, macrophages, dechets, aDamagesB, 100);
-			processCollisions(0, macrophages, dechets, aDamagesB, 100);
+			processCollisions(0, 25, macrophages, bacteries, aDamagesB, 49);
+			processCollisions(0, 25, macrophages, toxines, aDamagesB, 100);
+			processCollisions(0, 25, macrophages, dechets, aDamagesB, 100);
+			processCollisions(0, 25, macrophages, dechets, aDamagesB, 100);
 			
-			processCollisions(20, lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
-			processCollisions(20, lymphB, virus, aSpecializes, Global.LYMPHBVIR);
+			processCollisions(20, 25, lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
+			processCollisions(20, 25, lymphB, virus, aSpecializes, Global.LYMPHBVIR);
 			
-			processCollisions(0, lymphBBact, bacteries, aDamagesB, 80);
-			processCollisions(0, lymphBVir, virus, aDamagesB, 80);
+			processCollisions(0, 25, lymphBBact, bacteries, aDamagesB, 80);
+			processCollisions(0, 25, lymphBVir, virus, aDamagesB, 80);
 			
-			processCollisions(0, lymphT, celStructInf, aDamagesB, 100);
-			processCollisions(0, lymphT, bactInf, aDamagesB, 1);
+			processCollisions(0, 25, lymphT, celStructInf, aDamagesB, 100);
+			processCollisions(0, 25, lymphT, bactInf, aDamagesB, 1);
 			
-			processCollisions(0, toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, 25, toxines, celStruct, aDamagesB, 1);
 			
-			processCollisions(10, virus, bacteries, aInfectsB, Global.BACTERIE);
-			processCollisions(10, virus, macrophages, aInfectsB, Global.MACROPHAGE);
-			processCollisions(10, virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
-			processCollisions(10, virus, celStruct, aInfectsB, Global.CELSTRUCT);
-			processCollisions(10, virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
+			processCollisions(20, -25, virus, bacteries, aInfectsB, Global.BACTERIE);
+			processCollisions(20, -25, virus, macrophages, aInfectsB, Global.MACROPHAGE);
+			processCollisions(20, -25, virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
+			processCollisions(20, -25, virus, celStruct, aInfectsB, Global.CELSTRUCT);
+			processCollisions(20, -25, virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
 			
-			processCollisions(0, toxines, celStruct, aDamagesB, 1);
-			processCollisions(0, toxines, lymphB, aDamagesB, 10);
-			processCollisions(0, toxines, lymphBBact, aDamagesB, 10);
-			processCollisions(0, toxines, lymphBVir, aDamagesB, 10);			
+			processCollisions(0, 25, toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, 25, toxines, lymphB, aDamagesB, 10);
+			processCollisions(0, 25, toxines, lymphBBact, aDamagesB, 10);
+			processCollisions(0, 25, toxines, lymphBVir, aDamagesB, 10);			
 		}
 		
 		private function fixTextures(f1:Family):void {
@@ -165,7 +165,7 @@ package systems {
 		}
  
 		//family f1 interacts with family f2 according to interaction function
-		private function processCollisions(range:int, f1:Family, f2:Family, interaction:Function, attr:int):void {
+		private function processCollisions(range:int, offset:int, f1:Family, f2:Family, interaction:Function, attr:int):void {
 			var n1:int = f1.members.length;
 			var n2:int = f2.members.length;
 			
@@ -176,7 +176,7 @@ package systems {
 				for (var j:int = 0; j < n2 ; j++) {
 					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
-					if (collision(range, ta, tb)) {
+					if (collision(range, offset, ta, tb)) {
 						interaction(a, b, attr);
 					}
 				}
@@ -186,10 +186,10 @@ package systems {
 		//returns "ta is in range of tb"
 		static private var deltax:Number = 25;
 		static private var deltay:Number = 5;			
-		private function collision(range:int, ta:Transform, tb:Transform):Boolean {
+		private function collision(range:int, offsetx:int, ta:Transform, tb:Transform):Boolean {
 			//trace("COMPARING" + ta.x + tb.x + "  " + ta.y + tb.y );
-			var x1:int = ta.x + 50 / 2;
-			var y1:int = ta.y + 50 / 2;
+			var x1:int = ta.x + offsetx;
+			var y1:int = ta.y + offsetx;
 			
 			var x2:int = tb.x ;
 			var y2:int = tb.y ;
