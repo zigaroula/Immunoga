@@ -109,6 +109,8 @@ package systems {
 			layerMapper 		= geneManager.getComponentMapper(Layered);
 		}
 		
+		public const windowx:int = 405;
+		public const windowy:int = 720;
 		override protected function onProcess(delta:Number):void
 		{
 			//borders
@@ -120,8 +122,7 @@ package systems {
 				var target:TargetPos = targetMapper.getComponent(e);
 				var si:SIEntity = siMapper.getComponent(e);
 				
-				//top border->kill
-				if (tr.y == -50 || tr.y > 730 || tr.x < - 10 || tr.x > 500)
+				if (tr.y == -50 || tr.y > windowy+10 || tr.x < - 10 || tr.x > windowx+50)
 					entityManager.killEntity(e);
 			}
 			
@@ -135,23 +136,23 @@ package systems {
 			processCollisions(20, 25, lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
 			processCollisions(20, 25, lymphB, virus, aSpecializes, Global.LYMPHBVIR);
 			
-			processCollisions(0, 25, lymphBBact, bacteries, aDamagesB, 80);
-			processCollisions(0, 25, lymphBVir, virus, aDamagesB, 80);
+			processCollisions(20, 25, lymphBBact, bacteries, aDamagesB, 80);
+			processCollisions(20, 25, lymphBVir, virus, aDamagesB, 80);
 			
-			processCollisions(0, 25, lymphT, celStructInf, aDamagesB, 100);
+			processCollisions(0, 0, lymphT, celStructInf, aDamagesB, 100);
 			processCollisions(0, 25, lymphT, bactInf, aDamagesB, 1);
 			
 			processCollisions(0, 25, toxines, celStruct, aDamagesB, 1);
 			
-			processCollisions(20, -25, virus, bacteries, aInfectsB, Global.BACTERIE);
+			processCollisions(20, 0, virus, bacteries, aInfectsB, Global.BACTERIE);
 			processCollisions(20, -25, virus, macrophages, aInfectsB, Global.MACROPHAGE);
 			processCollisions(20, -25, virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
 			processCollisions(20, -25, virus, celStruct, aInfectsB, Global.CELSTRUCT);
 			processCollisions(20, -25, virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
 			
-			processCollisions(0, 25, toxines, celStruct, aDamagesB, 1);
-			processCollisions(0, 25, toxines, lymphB, aDamagesB, 10);
-			processCollisions(0, 25, toxines, lymphBBact, aDamagesB, 10);
+			processCollisions(0, -25, toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, -25, toxines, lymphB, aDamagesB, 10);
+			processCollisions(0, -50, toxines, lymphBBact, aDamagesB, 10);
 			processCollisions(0, 25, toxines, lymphBVir, aDamagesB, 10);			
 		}
 		
