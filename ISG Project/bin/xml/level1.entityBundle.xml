@@ -30,7 +30,8 @@
 	</e>
 	
 	<e>
-		<Transform x="100" y="400" rotation="90" visible="false"  alpha="1"/>
+		<Transform x="300" y="400" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="390" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/virus.png" id="virus" />
@@ -41,6 +42,8 @@
 	
 	<e>
 		<Transform x="300" y="400" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="450" />
+		<Speed velocity="0.5" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/structCell.png" id="cell" />
 		<CelluleStructure />

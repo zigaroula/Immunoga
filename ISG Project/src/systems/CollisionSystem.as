@@ -98,7 +98,7 @@ package systems {
 			celStructInf    = entityManager.getFamily(noneOfGenes(Spawn), 					allOfGenes(CelluleStructure, Infection ));
 			bactInf   		= entityManager.getFamily(noneOfGenes(Spawn), 					allOfGenes(CelluleStructure, Infection ));
 			
-			infected   		= entityManager.getFamily(noneOfGenes(Spawn, Layered), 	allOfGenes(Infection));
+			infected   		= entityManager.getFamily(noneOfGenes(Spawn, Layered), 	allOfGenes(Infection, TargetPos));
 		
 			transformMapper = geneManager.getComponentMapper(Transform);
 			targetMapper 		= geneManager.getComponentMapper(TargetPos);
@@ -160,7 +160,13 @@ package systems {
 			var n1:int = f1.members.length;
 			for (var i:int = 0 ; i < n1 ; i++) {
 				var a:IEntity = f1.members[i];
-				//trace("fixing");
+				//trace("fixing");				
+				var t:TargetPos = targetMapper.getComponent(a);
+				var tr:Transform = transformMapper.getComponent(a);
+				
+				if(t.x==tr.x && t.y==tr.y)
+					t.x = tr.x + 1;
+				
 				entityManager.addComponent (a, Layered, { layerId:"gameLayer" } );
 			}
 		}
