@@ -20,6 +20,9 @@ package systems {
 	import components.Game.MenuButton;
 	import components.Infection;
 	import components.SystemeImmunitaire.CelluleStructure;
+	import components.Game.UI;
+	import com.ktm.genome.render.component.Layered;
+	import com.ktm.genome.resource.component.TextureResource;
 	
 	
 	public class LevelSystem extends System {
@@ -28,6 +31,7 @@ package systems {
 		private var celStruct:Family;
 		private var siEntities:Family;
 		private var ships:Family;
+		private var ui:Family;
 		private var curLevel:Level;
 		
 		private var levelMapper:IComponentMapper;
@@ -48,6 +52,7 @@ package systems {
 			celStruct = entityManager.getFamily(allOfGenes(CelluleStructure), noneOfGenes(Infection));
 			siEntities = entityManager.getFamily(allOfGenes(SIEntity));
 			ships = entityManager.getFamily(allOfGenes(Ship));
+			ui =  entityManager.getFamily(allOfGenes(UI));
 			
 			levelMapper = geneManager.getComponentMapper(Level);
 			siMapper = geneManager.getComponentMapper(SIEntity);
@@ -84,6 +89,7 @@ package systems {
 			killFamily(siEntities);
 			killFamily(levels);
 			killFamily(menuButtons);
+			killFamily(ui);
 		}
 		
 		public function killFamily(f:Family):void {
@@ -110,11 +116,21 @@ package systems {
 		}
 		
 		public function win():void {
+			var e:IEntity = entityManager.create();
+			entityManager.addComponent (e, UI, { } );
+			entityManager.addComponent (e, Transform,  {x:150, y:30} );
+			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
+			entityManager.addComponent (e, TextureResource, { source:"pictures/win.png", id:"win" } );
 			trace("win");
 		}
 		
 		public function lose():void {
-			trace("lose");
+			var e:IEntity = entityManager.create();
+			entityManager.addComponent (e, UI, { } );
+			entityManager.addComponent (e, Transform,  {x:150, y:30} );
+			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
+			entityManager.addComponent (e, TextureResource, { source:"pictures/lose.png", id:"win" } );
+			trace("win");
 		}
 		
 		private function clickHandler(event:MouseEvent):void {
