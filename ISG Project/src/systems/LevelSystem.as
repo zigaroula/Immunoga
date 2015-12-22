@@ -85,6 +85,7 @@ package systems {
 		public function loadMenu():void {
 			clearLevel();
 			trace("loading menu");
+			EntityFactory.createResourcedEntity(world.getEntityManager(), 'xml/menu.entityBundle.xml', "menu");
 		}
 		
 		public function win():void {
