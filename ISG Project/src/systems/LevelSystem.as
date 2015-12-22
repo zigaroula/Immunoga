@@ -9,6 +9,8 @@ package systems {
 	import com.ktm.genome.render.component.Transform;
 	import com.lip6.genome.geography.move.component.TargetPos;
 	import flash.display.Stage;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
 	
 	import components.Game.Ship;
@@ -34,6 +36,7 @@ package systems {
 		
 		public function LevelSystem(stage:Stage) {
 			stage.addEventListener(MouseEvent.CLICK, clickHandler);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
 		}
 		
 		override protected function onConstructed():void {
@@ -122,9 +125,13 @@ package systems {
 				var mB:MenuButton = menuButtonMapper.getComponent(e);
 				if (x >= tr.x && x <= tr.x + 100 && y >= tr.y && y <= tr.y + 100 && mB.level != 0) {
 					loadLevel(mB.level);
-				} else if (x >= tr.x && x <= tr.x + 100 && y >= tr.y && y <= tr.y + 50 && mB.level == 0) {
-					loadMenu();
 				}
+			}
+		}
+		
+		private function keyHandler(event:KeyboardEvent):void {
+			if (event.keyCode == Keyboard.ESCAPE) {
+				loadMenu();
 			}
 		}
 	}
