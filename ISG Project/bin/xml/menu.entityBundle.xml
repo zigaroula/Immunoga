@@ -17,9 +17,46 @@
 	<a name="Background" class="components.Game.Background" />
 	<a name="Spawn" class="components.Game.Spawn" />
 	<a name="Level" class="components.Game.Level" />
+	<a name="MenuButton" class="components.Game.MenuButton" />
 
 
 	<!-- Définition des entités -->	
+	<e>
+		<Transform x="25" y="200" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/level1.png" id="level1" />
+		<MenuButton level="1" />
+	</e>
+	<e>
+		<Transform x="150" y="200" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/level2.png" id="level2" />
+		<MenuButton level="2" />
+	</e>
+	<e>
+		<Transform x="275" y="200" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/level3.png" id="level3" />
+		<MenuButton level="3" />
+	</e>
+	<e>
+		<Transform x="25" y="325" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/level4.png" id="level4" />
+		<MenuButton level="4" />
+	</e>
+	<e>
+		<Transform x="150" y="325" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/level5.png" id="level5" />
+		<MenuButton level="5" />
+	</e>
+	<e>
+		<Transform x="275" y="325" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/level6.png" id="level6" />
+		<MenuButton level="6" />
+	</e>
 	
 	
 </resource>

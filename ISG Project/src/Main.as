@@ -26,6 +26,7 @@ package {
 		
 		private var world:IWorld;
 		private var gameURL:String = 'xml/game.entityBundle.xml';
+		private var menu:String = 'xml/menu.entityBundle.xml';
 		private var level1:String = 'xml/level1.entityBundle.xml';
 		
 		public function Main() {
@@ -52,13 +53,13 @@ package {
 			sm.setSystem(HpSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(CollisionSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(DeathSystem).setProcess(ProcessPhase.FRAME);
-			sm.setSystem(LevelSystem).setProcess(ProcessPhase.FRAME);
+			sm.setSystem(new LevelSystem(stage)).setProcess(ProcessPhase.FRAME);
 			//start
 			
 			var level:int = 0;
 			EntityFactory.createResourcedEntity(world.getEntityManager(), gameURL, "game");
 			switch(level) {
-				case 0:  EntityFactory.createResourcedEntity(world.getEntityManager(), level1, "level1");
+				case 0:  EntityFactory.createResourcedEntity(world.getEntityManager(), menu, "menu");
 					break;
 				case 1: EntityFactory.createResourcedEntity(world.getEntityManager(), level1, "level1");
 					break;
