@@ -76,21 +76,17 @@ package systems {
 		
 		public function clearLevel():void {
 			trace("clearing level");
-			var n:int = siEntities.members.length;
+			killFamily(siEntities);
+			killFamily(levels);
+			killFamily(menuButtons);
+		}
+		
+		public function killFamily(f:Family) {
+			var n:int = f.members.length;
 			var i:int = 0
 			var e:IEntity;
 			for (i=0 ; i < n ; i++) {
-				e = siEntities.members[i];
-				entityManager.killEntity(e);
-			}
-			n =levels.members.length;
-			for (i=0 ; i < n ; i++) {
-				e = levels.members[i];
-				entityManager.killEntity(e);
-			}
-			n = menuButtons.members.length;
-			for (i = 0 ; i < n ; i++) {
-				e = menuButtons.members[i];
+				e = f.members[i];
 				entityManager.killEntity(e);
 			}
 		}
