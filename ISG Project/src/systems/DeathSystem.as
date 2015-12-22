@@ -32,6 +32,9 @@ package systems {
 		private var siMapper:IComponentMapper;
 		private var infectionMapper:IComponentMapper;
 		
+		private var x:int;
+		private var y:int;
+		
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
@@ -57,8 +60,8 @@ package systems {
 				var si:SIEntity = siMapper.getComponent(e);
 				
 				if (si.hp < 0) {
-					var x:int = tr.x + 15;
-					var y:int = tr.y + 15;
+					x = tr.x + 15;
+					y = tr.y + 15;
 										
 					entityManager.killEntity(e);
 					
@@ -114,8 +117,8 @@ package systems {
 				si = siMapper.getComponent(e);
 				
 				if (si.hp < 0) {
-					var x:int = tr.x + 15;
-					var y:int = tr.y + 15;
+					x = tr.x + 15;
+					y = tr.y + 15;
 										
 					entityManager.killEntity(e);
 					
@@ -124,7 +127,6 @@ package systems {
 					EntityFactory.createDechet(entityManager, x     , y + 11, x     , y + 11, 3);
 					EntityFactory.createDechet(entityManager, x - 11, y     , x - 11, y     , 1);
 					EntityFactory.createDechet(entityManager, x     , y     , x     , y     , 2);
-					
 				}
 			}
 			
@@ -143,7 +145,7 @@ package systems {
 					
 					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
 					EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
-					
+
 				}
 				
 			}

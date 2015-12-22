@@ -84,7 +84,7 @@ package systems {
 			killFamily(menuButtons);
 		}
 		
-		public function killFamily(f:Family) {
+		public function killFamily(f:Family):void {
 			var n:int = f.members.length;
 			var i:int = 0
 			var e:IEntity;
