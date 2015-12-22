@@ -22,13 +22,6 @@
 	<!-- Définition des entités -->	
 	
 	<e>
-		<Transform x="0" y="0" rotation="0" visible="true"  alpha="1"/>
-		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/menu.png" id="menu" />
-		<MenuButton level="0" />
-	</e>
-	
-	<e>
 		<Level duration="17000"  nCelStruct="1" />
 	</e>
 	
