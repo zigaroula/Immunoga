@@ -16,6 +16,7 @@ package {
 	import systems.BacterieSpawnSystem;
 	import systems.HpSystem
 	import systems.DeathSystem;
+	import systems.LevelSystem;
 	
 	import flash.events.MouseEvent;
 	import flash.events.KeyboardEvent;
@@ -51,6 +52,7 @@ package {
 			sm.setSystem(HpSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(CollisionSystem).setProcess(ProcessPhase.FRAME);
 			sm.setSystem(DeathSystem).setProcess(ProcessPhase.FRAME);
+			sm.setSystem(LevelSystem).setProcess(ProcessPhase.FRAME);
 			//start
 			
 			var level:int = 0;

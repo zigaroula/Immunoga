@@ -16,8 +16,15 @@
 	<a name="Ship" class="components.Game.Ship" />
 	<a name="Background" class="components.Game.Background" />
 	<a name="Spawn" class="components.Game.Spawn" />
+	<a name="Level" class="components.Game.Level" />
+
 
 	<!-- Définition des entités -->	
+	
+	<e>
+		<Level duration="17000"  nCelStruct="1" />
+	</e>
+	
 	<e>
 		<Transform x="100" y="10" rotation="90" visible="false"  alpha="1"/>
 		<TargetPos x="100" y="20" />
