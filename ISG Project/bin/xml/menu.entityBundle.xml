@@ -20,7 +20,7 @@
 	<a name="MenuButton" class="components.Game.MenuButton" />
 
 
-	<!-- Définition des entités -->	
+	<!-- Définition des entités -->
 	<e>
 		<Transform x="25" y="200" rotation="0" visible="true"  alpha="1"/>
 		<Layered layerId="gameLayer" />

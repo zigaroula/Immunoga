@@ -22,7 +22,7 @@
 	<!-- Définition des entités -->	
 	
 	<e>
-		<Level duration="17000"  nCelStruct="1" />
+		<Level duration="17000"  nCelStruct="1" number="5" />
 	</e>
 	
 	<e>

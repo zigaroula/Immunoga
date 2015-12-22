@@ -12,12 +12,14 @@ package systems {
 	import com.ktm.genome.render.component.Transform;
 	import com.lip6.genome.geography.move.component.TargetPos;
 	import components.Game.Ship;
+	import components.Game.Level;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
 	public class ControllerSystem extends System {
 		
 		private var ships:Family;
+		private var levels:Family;
 		private var transformMapper:IComponentMapper;
 		private var speed:Number = 10;			
 		private var hash:Object = { };
@@ -34,6 +36,7 @@ package systems {
 			super.onConstructed();
 			
 			ships = entityManager.getFamily(allOfGenes(Ship));
+			levels = entityManager.getFamily(allOfGenes(Level));
 			transformMapper = geneManager.getComponentMapper(Transform);
 		}
 		
@@ -56,7 +59,7 @@ package systems {
 			if (isKeyDown(Keyboard.DOWN))
 				tr.y = Math.min(Math.max(0, tr.y + speed), 720 - 40);
 			
-			if (isKeyDown(Keyboard.SPACE)) {
+			if (isKeyDown(Keyboard.SPACE) && levels.members.length != 0) {
 				if (cpt>=5) {
 					EntityFactory.createEntityOfType(entityManager, tr.x, tr.y, type);
 					cpt = 0;

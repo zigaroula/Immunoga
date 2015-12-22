@@ -27,6 +27,7 @@ package systems {
 		private var menuButtons:Family;
 		private var celStruct:Family;
 		private var siEntities:Family;
+		private var ships:Family;
 		private var curLevel:Level;
 		
 		private var levelMapper:IComponentMapper;
@@ -46,6 +47,7 @@ package systems {
 			menuButtons = entityManager.getFamily(allOfGenes(MenuButton));
 			celStruct = entityManager.getFamily(allOfGenes(CelluleStructure), noneOfGenes(Infection));
 			siEntities = entityManager.getFamily(allOfGenes(SIEntity));
+			ships = entityManager.getFamily(allOfGenes(Ship));
 			
 			levelMapper = geneManager.getComponentMapper(Level);
 			siMapper = geneManager.getComponentMapper(SIEntity);
@@ -129,6 +131,7 @@ package systems {
 				var mB:MenuButton = menuButtonMapper.getComponent(e);
 				if (x >= tr.x && x <= tr.x + 100 && y >= tr.y && y <= tr.y + 100 && mB.level != 0) {
 					loadLevel(mB.level);
+					return;
 				}
 			}
 		}
@@ -136,6 +139,22 @@ package systems {
 		private function keyHandler(event:KeyboardEvent):void {
 			if (event.keyCode == Keyboard.ESCAPE) {
 				loadMenu();
+				return;
+			}
+			if (event.keyCode == Keyboard.SPACE) {
+				var ship:IEntity = ships.members[0];
+				var x:int = (transformMapper.getComponent(ship)).x;
+				var y:int = (transformMapper.getComponent(ship)).y;
+				var n:int = menuButtons.members.length;
+				for (var i:int = 0 ; i < n ; i++) {
+					var e:IEntity = menuButtons.members[i];
+					var tr:Transform = transformMapper.getComponent(e);
+					var mB:MenuButton = menuButtonMapper.getComponent(e);
+					if (x >= tr.x && x <= tr.x + 100 && y >= tr.y && y <= tr.y + 100 && mB.level != 0) {
+						loadLevel(mB.level);
+						return;
+					}
+				}
 			}
 		}
 	}
