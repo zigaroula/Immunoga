@@ -10,6 +10,7 @@ package systems {
 	import com.lip6.genome.geography.move.component.TargetPos;
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
+	import flash.net.SharedObject;
 	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
 	
@@ -39,7 +40,8 @@ package systems {
 		private var menuButtonMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
 		
-		private var completedLevels:Array = new Array(0, 0, 0, 0, 0, 0);
+		private var completedLevels:Array;
+		private var saveDataObject:SharedObject;
 		
 		public function LevelSystem(stage:Stage) {
 			stage.addEventListener(MouseEvent.CLICK, clickHandler);
@@ -60,6 +62,17 @@ package systems {
 			siMapper = geneManager.getComponentMapper(SIEntity);
 			menuButtonMapper = geneManager.getComponentMapper(MenuButton);
 			transformMapper = geneManager.getComponentMapper(Transform);
+			
+			// Load save
+			saveDataObject = SharedObject.getLocal("test");
+			if (saveDataObject.data.completedLevels == null) {
+				completedLevels = new Array(0, 0, 0, 0, 0, 0);
+				saveDataObject.data.completedLevels = completedLevels;
+				saveDataObject.flush();
+			} else {
+				completedLevels = saveDataObject.data.completedLevels;
+			}
+			loadMenu();
 		}
 		
 		override protected function onProcess(delta:Number):void
@@ -119,6 +132,8 @@ package systems {
 		}
 		
 		public function markCompletedLevels() {
+			saveDataObject.data.completedLevels = completedLevels;
+			saveDataObject.flush();
 			for (var i:int = 0 ; i < completedLevels.length ; i++) {
 				if (completedLevels[i] == 1) {
 					markLevel(25 + (i % 3) * 125, Math.floor(i/3) * 125 + 200);
@@ -188,6 +203,12 @@ package systems {
 						return;
 					}
 				}
+			}
+			if (event.keyCode == Keyboard.DELETE) {
+				completedLevels = new Array(0, 0, 0, 0, 0, 0);
+				saveDataObject.data.completedLevels = completedLevels;
+				saveDataObject.flush();
+				loadMenu();
 			}
 		}
 	}
