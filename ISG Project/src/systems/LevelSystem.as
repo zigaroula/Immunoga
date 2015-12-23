@@ -118,10 +118,19 @@ package systems {
 		}
 		
 		public function loadLevel(n:int):void {
-			clearLevel();
-			var url:String = 'xml/level' + n + '.entityBundle.xml';
-			var name:String = 'level' + n;
-			EntityFactory.createResourcedEntity(world.getEntityManager(), url, name);
+			if (n != 1) {
+				if (completedLevels[n - 2] != 0) {
+					clearLevel();
+					var url:String = 'xml/level' + n + '.entityBundle.xml';
+					var name:String = 'level' + n;
+					EntityFactory.createResourcedEntity(world.getEntityManager(), url, name);
+				}
+			} else {
+				clearLevel();
+				var url:String = 'xml/level' + n + '.entityBundle.xml';
+				var name:String = 'level' + n;
+				EntityFactory.createResourcedEntity(world.getEntityManager(), url, name);
+			}
 		}
 		
 		public function loadMenu():void {
