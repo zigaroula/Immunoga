@@ -35,7 +35,7 @@
 	<e>
 		<Transform x="200" y="601" />
 		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/selection.png" id="ship" />
+		<TextureResource source="pictures/ship.png" id="ship" />
 		<Ship />
 		
 	</e>
