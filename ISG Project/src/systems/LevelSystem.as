@@ -39,6 +39,8 @@ package systems {
 		private var menuButtonMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
 		
+		private var completedLevels:Array = new Array(0, 0, 0, 0, 0, 0);
+		
 		public function LevelSystem(stage:Stage) {
 			stage.addEventListener(MouseEvent.CLICK, clickHandler);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
@@ -113,6 +115,23 @@ package systems {
 			clearLevel();
 			trace("loading menu");
 			EntityFactory.createResourcedEntity(world.getEntityManager(), 'xml/menu.entityBundle.xml', "menu");
+			markCompletedLevels();
+		}
+		
+		public function markCompletedLevels() {
+			for (var i:int = 0 ; i < completedLevels.length ; i++) {
+				if (completedLevels[i] == 1) {
+					markLevel(25 + (i % 3) * 125, Math.floor(i/3) * 125 + 200);
+				}
+			}
+		}
+		
+		public function markLevel(xL:int, yL:int) {
+			var e:IEntity = entityManager.create();
+			entityManager.addComponent (e, UI, { } );
+			entityManager.addComponent (e, Transform,  {x:xL, y:yL} );
+			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
+			entityManager.addComponent (e, TextureResource, { source:"pictures/win.png", id:"win" } );
 		}
 		
 		public function win():void {
@@ -121,7 +140,9 @@ package systems {
 			entityManager.addComponent (e, Transform,  {x:150, y:30} );
 			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
 			entityManager.addComponent (e, TextureResource, { source:"pictures/win.png", id:"win" } );
-			trace("win");
+			var number:int = (levelMapper.getComponent(levels.members[0])).number;
+			completedLevels[number-1] = 1;
+			trace("win level " + number);
 		}
 		
 		public function lose():void {
@@ -129,7 +150,7 @@ package systems {
 			entityManager.addComponent (e, UI, { } );
 			entityManager.addComponent (e, Transform,  {x:150, y:30} );
 			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
-			entityManager.addComponent (e, TextureResource, { source:"pictures/lose.png", id:"win" } );
+			entityManager.addComponent (e, TextureResource, { source:"pictures/lose.png", id:"lose" } );
 			trace("win");
 		}
 		
