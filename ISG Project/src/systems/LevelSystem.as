@@ -155,10 +155,6 @@ package systems {
 					toMarkLevels = false;
 				}
 			}
-			/*
-			for (var i:int = 0 ; i < completedLevels.length ; i++) {
-				markLevel(25 + (i % 3) * 125, Math.floor(i / 3) * 125 + 200, comp	letedLevels[i]);
-			}*/
 		}
 		
 		public function addUI(_x:int, _y:int, _source:String, _id:String):void {
@@ -171,7 +167,7 @@ package systems {
 		
 		public function markLevel(xL:int, yL:int, unlocked:int):void {
 			if(unlocked==1)
-				addUI(xL, yL, "pictures/win.png", "win");
+				addUI(xL, yL, "pictures/complete.png", "complete");
 			else if(unlocked==0)
 				addUI(xL, yL, "pictures/lock.png", "lock");
 		}
