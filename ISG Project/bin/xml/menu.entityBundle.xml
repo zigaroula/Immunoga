@@ -22,6 +22,13 @@
 
 	<!-- Définition des entités -->
 	<e>
+		<Transform x="0" y="0" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/title.png" id="title" />
+		<MenuButton level="1" />
+	</e>
+	
+	<e>
 		<Transform x="25" y="200" rotation="0" visible="true"  alpha="1"/>
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/level1.png" id="level1" />

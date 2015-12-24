@@ -159,7 +159,7 @@ package systems {
 		}
 		
 		public function win():void {
-			addUI(150, 30, "pictures/win.png", "win");
+			addUI(150, 90, "pictures/win.png", "win");
 			
 			var number:int = (levelMapper.getComponent(levels.members[0])).number;
 			completedLevels[number - 1] = 1;
@@ -172,7 +172,7 @@ package systems {
 		}
 		
 		public function lose():void {
-			addUI(150, 30, "pictures/lose.png", "lose");
+			addUI(150, 90, "pictures/lose.png", "lose");
 		}
 		
 		
