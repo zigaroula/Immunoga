@@ -69,7 +69,7 @@ package systems {
 			// Load save
 			saveDataObject = SharedObject.getLocal("test");
 			if (saveDataObject.data.completedLevels == null) {
-				completedLevels = new Array(0, 0, 0, 0, 0, 0);
+				completedLevels = new Array(2, 0, 0, 0, 0, 0); //0,1,2 = locked, completed, unlocked
 				saveDataObject.data.completedLevels = completedLevels;
 				saveDataObject.flush();
 			} else {
@@ -119,14 +119,7 @@ package systems {
 		}
 		
 		public function loadLevel(n:int):void {
-			if (n != 1) {
-				if (completedLevels[n - 2] != 0) {
-					clearLevel();
-					url = 'xml/level' + n + '.entityBundle.xml';
-					var name:String = 'level' + n;
-					EntityFactory.createResourcedEntity(world.getEntityManager(), url, name);
-				}
-			} else {
+			if(completedLevels[n-1] != 0) {
 				clearLevel();
 				url = 'xml/level' + n + '.entityBundle.xml';
 				name = 'level' + n;
@@ -144,39 +137,42 @@ package systems {
 		public function markCompletedLevels():void {
 			saveDataObject.data.completedLevels = completedLevels;
 			saveDataObject.flush();
+			
 			for (var i:int = 0 ; i < completedLevels.length ; i++) {
-				if (completedLevels[i] == 1) {
-					markLevel(25 + (i % 3) * 125, Math.floor(i/3) * 125 + 200);
-				}
+				markLevel(25 + (i % 3) * 125, Math.floor(i / 3) * 125 + 200, completedLevels[i]);
 			}
 		}
 		
-		public function markLevel(xL:int, yL:int):void {
+		public function addUI(_x:int, _y:int, _source:String, _id:String):void {
 			var e:IEntity = entityManager.create();
 			entityManager.addComponent (e, UI, { } );
-			entityManager.addComponent (e, Transform,  {x:xL, y:yL} );
+			entityManager.addComponent (e, Transform,  {x:_x, y:_y} );
 			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
-			entityManager.addComponent (e, TextureResource, { source:"pictures/win.png", id:"win" } );
+			entityManager.addComponent (e, TextureResource, { source:_source, id:_id } );
+		}
+		
+		public function markLevel(xL:int, yL:int, unlocked:int):void {
+			if(unlocked==1)
+				addUI(xL, yL, "pictures/win.png", "win");
+			else if(unlocked==0)
+				addUI(xL, yL, "pictures/lock.png", "lock");
 		}
 		
 		public function win():void {
-			var e:IEntity = entityManager.create();
-			entityManager.addComponent (e, UI, { } );
-			entityManager.addComponent (e, Transform,  {x:150, y:30} );
-			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
-			entityManager.addComponent (e, TextureResource, { source:"pictures/win.png", id:"win" } );
+			addUI(150, 30, "pictures/win.png", "win");
+			
 			var number:int = (levelMapper.getComponent(levels.members[0])).number;
-			completedLevels[number-1] = 1;
+			completedLevels[number - 1] = 1;
+			
+			//unlock next level
+			if(number < completedLevels.length)
+				completedLevels[number] = 2;
+			
 			trace("win level " + number);
 		}
 		
 		public function lose():void {
-			var e:IEntity = entityManager.create();
-			entityManager.addComponent (e, UI, { } );
-			entityManager.addComponent (e, Transform,  {x:150, y:30} );
-			entityManager.addComponent (e, Layered, { layerId:"gameLayer" } );
-			entityManager.addComponent (e, TextureResource, { source:"pictures/lose.png", id:"lose" } );
-			trace("win");
+			addUI(150, 30, "pictures/lose.png", "lose");
 		}
 		
 		
@@ -212,7 +208,7 @@ package systems {
 			}
 			//reset progression
 			if (event.keyCode == Keyboard.DELETE) {
-				completedLevels = new Array(0, 0, 0, 0, 0, 0);
+				completedLevels = new Array(2, 0, 0, 0, 0, 0);
 				saveDataObject.data.completedLevels = completedLevels;
 				saveDataObject.flush();
 				loadMenu();

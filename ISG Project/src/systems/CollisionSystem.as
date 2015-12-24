@@ -73,7 +73,7 @@ package systems {
 		
 		private var layerMapper:IComponentMapper;
 		
-		private var cx:int = Global.cellsize;
+		private var cx:int = Global.cellsize - 5;
 		
 		override protected function onConstructed():void {
 			super.onConstructed();
@@ -128,32 +128,32 @@ package systems {
 			
 			fixTextures(infected);
 			
-			processCollisions(0, cx, 			macrophages, bacteries, aDamagesB, 49);
-			processCollisions(0, cx,	 		macrophages, toxines, aDamagesB, 100);
-			processCollisions(0, cx, 			macrophages, dechets, aDamagesB, 100);
-			processCollisions(0, cx, 			macrophages, dechets, aDamagesB, 100);
+			processCollisions(cx/2, 	cx,		macrophages, bacteries, aDamagesB, 49);
+			processCollisions(cx/2, 	cx, 		macrophages, toxines, aDamagesB, 100);
+			processCollisions(cx/2, 	cx,		macrophages, dechets, aDamagesB, 100);
+			processCollisions(cx/2,	cx,		macrophages, dechets, aDamagesB, 100);
 			
-			processCollisions(20, cx, 		lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
-			processCollisions(20, cx, 		lymphB, virus, aSpecializes, Global.LYMPHBVIR);
+			processCollisions(cx,		cx, 		lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
+			processCollisions(cx,		cx, 		lymphB, virus, aSpecializes, Global.LYMPHBVIR);
 			
-			processCollisions(20, cx, 		lymphBBact, bacteries, aDamagesB, 80);
-			processCollisions(20, cx, 		lymphBVir, virus, aDamagesB, 80);
+			processCollisions(cx, 		cx, 		lymphBBact, bacteries, aDamagesB, 80);
+			processCollisions(cx, 		cx, 		lymphBVir, virus, aDamagesB, 80);
 			
-			processCollisions(0, 0, 			lymphT, celStructInf, aDamagesB, 100);
-			processCollisions(0, cx, 			lymphT, bactInf, aDamagesB, 1);
+			processCollisions(cx/2,	0,			lymphT, celStructInf, aDamagesB, 100);
+			processCollisions(cx/2, 	cx,		lymphT, bactInf, aDamagesB, 1);
 			
-			processCollisions(0, cx, 			toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, 		cx,		toxines, celStruct, aDamagesB, 1);
 			
-			processCollisions(20, 0, 			virus, bacteries, aInfectsB, Global.BACTERIE);
-			processCollisions(20, -1 * cx, 	virus, macrophages, aInfectsB, Global.MACROPHAGE);
-			processCollisions(20, -1 * cx, 	virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
-			processCollisions(20, -1 * cx, 	virus, celStruct, aInfectsB, Global.CELSTRUCT);
-			processCollisions(20, -1 * cx, 	virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
+			processCollisions(cx/2, 	0, 		virus, bacteries, aInfectsB, Global.BACTERIE);
+			processCollisions(cx/2, -1 * cx, 	virus, macrophages, aInfectsB, Global.MACROPHAGE);
+			processCollisions(cx/2, -1 * cx, 	virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
+			processCollisions(cx/2, -1 * cx, 	virus, celStruct, aInfectsB, Global.CELSTRUCT);
+			processCollisions(cx/2, -1 * cx, 	virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
 			
-			processCollisions(0, -1 * cx, 	toxines, celStruct, aDamagesB, 1);
-			processCollisions(0, -1 * cx, 	toxines, lymphB, aDamagesB, 10);
-			processCollisions(0, -2 * cx, 	toxines, lymphBBact, aDamagesB, 10);
-			processCollisions(0, cx, 			toxines, lymphBVir, aDamagesB, 10);			
+			processCollisions(cx/2, -1 * cx, 	toxines, celStruct, aDamagesB, 1);
+			processCollisions(cx/2, -1 * cx, 	toxines, lymphB, aDamagesB, 10);
+			processCollisions(cx/2, -2 * cx, 	toxines, lymphBBact, aDamagesB, 10);
+			processCollisions(cx/2, 	cx,		toxines, lymphBVir, aDamagesB, 10);			
 		}
 		
 		private function fixTextures(f1:Family):void {
@@ -192,8 +192,8 @@ package systems {
 		}
 		
 		//returns "ta is in range of tb"
-		static private var deltax:Number = 25;
-		static private var deltay:Number = 5;			
+		static private var deltax:Number = 10;
+		static private var deltay:Number = 10;			
 		private function collision(range:int, offsetx:int, ta:Transform, tb:Transform):Boolean {
 			//trace("COMPARING" + ta.x + tb.x + "  " + ta.y + tb.y );
 			var x1:int = ta.x + offsetx;
@@ -222,7 +222,7 @@ package systems {
 			var y:int = tr.y;
 				
 			entityManager.killEntity(a);
-			EntityFactory.createEntityOfType(entityManager, x-Global.cellsize/2, y+10, type);	
+			EntityFactory.createEntityOfType(entityManager, x, y+10, type);	
 		}
 		
 		//kills a, adds Infection component to b, changes b texture based on type
