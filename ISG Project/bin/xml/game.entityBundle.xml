@@ -27,6 +27,10 @@
 		<Background />
 	</e>
 	<e>
+		<Transform x="0" y="0" />
+		<Layer id="shipLayer" index="2" />
+	</e>
+	<e>
 		<Transform x="0" y="-720" />
 		<Layered layerId="background" />
 		<TextureResource source="pictures/background.png" id="background"  />
@@ -34,7 +38,7 @@
 	
 	<e>
 		<Transform x="200" y="601" />
-		<Layered layerId="gameLayer" />
+		<Layered layerId="shipLayer" />
 		<TextureResource source="pictures/ship.png" id="ship" />
 		<Ship />
 		
