@@ -48,24 +48,25 @@ package systems {
 			var tr:Transform = transformMapper.getComponent(s);
 			
 			if (isKeyDown(Keyboard.LEFT))
-				tr.x = Math.min(Math.max(0, tr.x - speed), 405 - 40);
-				
+				tr.x = newValue(tr.x,	-1*speed,	0,	Global.windowx,	Global.shipsize / 3		);
 			if (isKeyDown(Keyboard.RIGHT))
-				tr.x = Math.min(Math.max(0, tr.x + speed), 405 - 40);
-			
+				tr.x = newValue(tr.x,	speed, 		0,	Global.windowx,	2*Global.shipsize / 3	);
 			if (isKeyDown(Keyboard.UP))
-				tr.y = Math.min(Math.max(0, tr.y - speed), 720 - 40);
-			
+				tr.y = newValue(tr.y,	-1*speed, 	0,	Global.windowy,	0								);
 			if (isKeyDown(Keyboard.DOWN))
-				tr.y = Math.min(Math.max(0, tr.y + speed), 720 - 40);
-			
+				tr.y = newValue(tr.y,	speed,		0,	Global.windowy,	2 * Global.shipsize / 3);
+				
 			if (isKeyDown(Keyboard.SPACE) && levels.members.length != 0) {
 				if (cpt>=5) {
-					EntityFactory.createEntityOfType(entityManager, tr.x, tr.y, type);
+					EntityFactory.createEntityOfType(entityManager, tr.x + Global.shipsize/2, tr.y, type);
 					cpt = 0;
 				}
 				cpt++;
 			}
+		}
+		
+		private function newValue(v:int, add:int, vmin:int , vmax:int, offset:int):int {
+			return Math.min(Math.max(vmin, v + add + offset), vmax ) - offset;
 		}
 		
 		private function keyHandleUp(event:KeyboardEvent):void {

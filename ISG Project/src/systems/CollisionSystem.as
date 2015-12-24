@@ -73,6 +73,8 @@ package systems {
 		
 		private var layerMapper:IComponentMapper;
 		
+		private var cx:int = Global.cellsize;
+		
 		override protected function onConstructed():void {
 			super.onConstructed();
 			
@@ -109,8 +111,6 @@ package systems {
 			layerMapper 		= geneManager.getComponentMapper(Layered);
 		}
 		
-		public const windowx:int = 405;
-		public const windowy:int = 720;
 		override protected function onProcess(delta:Number):void
 		{
 			//borders
@@ -122,38 +122,38 @@ package systems {
 				var target:TargetPos = targetMapper.getComponent(e);
 				var si:SIEntity = siMapper.getComponent(e);
 				
-				if (tr.y == -50 || tr.y > windowy+10 || tr.x < - 10 || tr.x > windowx+50)
+				if (tr.y == -50 || tr.y > Global.windowy+10 || tr.x < - 10 || tr.x > Global.windowx+50)
 					entityManager.killEntity(e);
 			}
 			
 			fixTextures(infected);
 			
-			processCollisions(0, 25, macrophages, bacteries, aDamagesB, 49);
-			processCollisions(0, 25, macrophages, toxines, aDamagesB, 100);
-			processCollisions(0, 25, macrophages, dechets, aDamagesB, 100);
-			processCollisions(0, 25, macrophages, dechets, aDamagesB, 100);
+			processCollisions(0, cx, 			macrophages, bacteries, aDamagesB, 49);
+			processCollisions(0, cx,	 		macrophages, toxines, aDamagesB, 100);
+			processCollisions(0, cx, 			macrophages, dechets, aDamagesB, 100);
+			processCollisions(0, cx, 			macrophages, dechets, aDamagesB, 100);
 			
-			processCollisions(20, 25, lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
-			processCollisions(20, 25, lymphB, virus, aSpecializes, Global.LYMPHBVIR);
+			processCollisions(20, cx, 		lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
+			processCollisions(20, cx, 		lymphB, virus, aSpecializes, Global.LYMPHBVIR);
 			
-			processCollisions(20, 25, lymphBBact, bacteries, aDamagesB, 80);
-			processCollisions(20, 25, lymphBVir, virus, aDamagesB, 80);
+			processCollisions(20, cx, 		lymphBBact, bacteries, aDamagesB, 80);
+			processCollisions(20, cx, 		lymphBVir, virus, aDamagesB, 80);
 			
-			processCollisions(0, 0, lymphT, celStructInf, aDamagesB, 100);
-			processCollisions(0, 25, lymphT, bactInf, aDamagesB, 1);
+			processCollisions(0, 0, 			lymphT, celStructInf, aDamagesB, 100);
+			processCollisions(0, cx, 			lymphT, bactInf, aDamagesB, 1);
 			
-			processCollisions(0, 25, toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, cx, 			toxines, celStruct, aDamagesB, 1);
 			
-			processCollisions(20, 0, virus, bacteries, aInfectsB, Global.BACTERIE);
-			processCollisions(20, -25, virus, macrophages, aInfectsB, Global.MACROPHAGE);
-			processCollisions(20, -25, virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
-			processCollisions(20, -25, virus, celStruct, aInfectsB, Global.CELSTRUCT);
-			processCollisions(20, -25, virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
+			processCollisions(20, 0, 			virus, bacteries, aInfectsB, Global.BACTERIE);
+			processCollisions(20, -1 * cx, 	virus, macrophages, aInfectsB, Global.MACROPHAGE);
+			processCollisions(20, -1 * cx, 	virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
+			processCollisions(20, -1 * cx, 	virus, celStruct, aInfectsB, Global.CELSTRUCT);
+			processCollisions(20, -1 * cx, 	virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
 			
-			processCollisions(0, -25, toxines, celStruct, aDamagesB, 1);
-			processCollisions(0, -25, toxines, lymphB, aDamagesB, 10);
-			processCollisions(0, -50, toxines, lymphBBact, aDamagesB, 10);
-			processCollisions(0, 25, toxines, lymphBVir, aDamagesB, 10);			
+			processCollisions(0, -1 * cx, 	toxines, celStruct, aDamagesB, 1);
+			processCollisions(0, -1 * cx, 	toxines, lymphB, aDamagesB, 10);
+			processCollisions(0, -2 * cx, 	toxines, lymphBBact, aDamagesB, 10);
+			processCollisions(0, cx, 			toxines, lymphBVir, aDamagesB, 10);			
 		}
 		
 		private function fixTextures(f1:Family):void {
@@ -164,6 +164,7 @@ package systems {
 				var t:TargetPos = targetMapper.getComponent(a);
 				var tr:Transform = transformMapper.getComponent(a);
 				
+				//need to always change x,y or the texture doesn't get reset
 				if(t.x==tr.x && t.y==tr.y)
 					t.x = tr.x + 1;
 				
@@ -203,6 +204,7 @@ package systems {
 			return ( (Math.abs(x1 - x2) < (deltax+range)) && (Math.abs(y1 - y2) < (deltay+range)) );
 		}
 		
+		//b.hp -= dmg
 		private function aDamagesB(a:IEntity, b:IEntity, dmg:int) :void{
 			var si:SIEntity = siMapper.getComponent(b);
 				//entityManager.killEntity(a);
@@ -212,17 +214,19 @@ package systems {
 					entityManager.killEntity(b);
 		}
 		
-		private function aSpecializes(a:IEntity, b:IEntity, type:int) :void {
+		//kills b, instantiate a new b based on type
+		private function aSpecializes(a:IEntity, b:IEntity, type:int):void {
 			var tr:Transform	= transformMapper.getComponent(a);
 			
 			var x:int = tr.x;
 			var y:int = tr.y;
 				
 			entityManager.killEntity(a);
-			EntityFactory.createEntityOfType(entityManager, x-25, y+10, type);	
+			EntityFactory.createEntityOfType(entityManager, x-Global.cellsize/2, y+10, type);	
 		}
 		
-		private function aInfectsB(a:IEntity, b:IEntity, type:int) :void {
+		//kills a, adds Infection component to b, changes b texture based on type
+		private function aInfectsB(a:IEntity, b:IEntity, type:int):void {
 			//trace("infect " + type);
 			entityManager.killEntity(a);
 			entityManager.addComponent(b, Infection, { } );
@@ -246,7 +250,7 @@ package systems {
 					entityManager.addComponent (b, TextureResource, { source:"pictures/lymphBBact_infected.png", id:"macrophage" } );
 					break;
 			}
-			entityManager.removeComponent(b, layerMapper.gene);
+			entityManager.removeComponent(b, layerMapper.gene); //remove the layered then add it next frame to reset the texture displayed
 		}
 	}
 }

@@ -34,8 +34,8 @@ package systems {
 				var t:Transform = transformMapper.getComponent(e);
 				
 				t.y = t.y + speed;
-				if (t.y > 720)
-					t.y = -360;
+				if (t.y > Global.windowy)
+					t.y = -1 * Global.windowy/2;
 			}
 		}
 	}

@@ -50,7 +50,6 @@ package systems {
 		
 		override protected function onProcess(delta:Number):void {
 			
-			
 			//Infected defenses
 			var familySize:int = infectedDefenses.members.length;
 			for (var i:int = 0; i < familySize; i++) {
@@ -62,7 +61,7 @@ package systems {
 				if (si.hp < 0) {
 					x = tr.x + 15;
 					y = tr.y + 15;
-										
+					
 					entityManager.killEntity(e);
 					
 					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
@@ -76,11 +75,8 @@ package systems {
 					EntityFactory.createVirus(entityManager, x, y, x     , y + 11);
 					EntityFactory.createVirus(entityManager, x, y, x - 11, y     );
 					EntityFactory.createVirus(entityManager, x, y, x     , y     );
-					
-					
 				}
 			}
-			
 			
 			//Infected bacteries
 			familySize = infectedBacteries.members.length;
@@ -92,7 +88,7 @@ package systems {
 				if (si.hp < 0) {
 					x = tr.x + 15;
 					y = tr.y + 15;
-										
+					
 					entityManager.killEntity(e);
 					
 					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
@@ -107,7 +103,6 @@ package systems {
 				
 			}
 			
-			
 			//Not infected defenses
 			familySize = notInfectedDefenses.members.length;
 			for (i = 0; i < familySize; i++) {
@@ -119,7 +114,7 @@ package systems {
 				if (si.hp < 0) {
 					x = tr.x + 15;
 					y = tr.y + 15;
-										
+					
 					entityManager.killEntity(e);
 					
 					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
@@ -140,14 +135,12 @@ package systems {
 				if (si.hp < 0) {
 					x = tr.x + 15;
 					y = tr.y + 15;
-										
+					
 					entityManager.killEntity(e);
 					
 					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
 					EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
-
-				}
-				
+				}	
 			}
 		}
 		

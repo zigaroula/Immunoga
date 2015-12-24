@@ -10,6 +10,14 @@ package {
 		
 		public static const CELSTRUCT:int = 1005;
 		public static const BACTERIE:int = 1006;
+		
+		public static const windowx:int = 405;
+		public static const windowy:int = 720;
+		
+		public static const shipsize:int = 100;
+		public static const cellsize:int = 50;
+		
+		public static const buttonsize:int = 100;
 	}
 
 }

@@ -68,8 +68,8 @@ package systems {
 					var newx:Number= target.x + tan * (Math.cos(angleRad));
 					var newy:Number = target.y + tan * (Math.sin(angleRad));
 					
-					target.x = Math.min(Math.max(0, newx), 405 - 20);
-					target.y = Math.min(Math.max(0, newy), 720 + 40);
+					target.x = Math.min(Math.max(0, newx), Global.windowx - 20);
+					target.y = Math.min(Math.max(0, newy), Global.windowy + 40);
 				}
 			}
 			
@@ -106,8 +106,8 @@ package systems {
 					newx = target.x + tan * (Math.cos(angleRad));
 					newy = target.y + tan * (Math.sin(angleRad));
 					
-					target.x = Math.min(Math.max(0, newx), 405);
-					target.y = Math.min(Math.max(0, newy), 720);
+					target.x = Math.min(Math.max(0, newx), Global.windowx);
+					target.y = Math.min(Math.max(0, newy), Global.windowy);
 				}
 			}
 			
@@ -134,8 +134,8 @@ package systems {
 					newx = target.x + tan * (Math.cos(angleRad));
 					newy = target.y + tan * (Math.sin(angleRad));
 					
-					target.x = Math.min(Math.max(0, newx), 405 - 20);
-					target.y = Math.min(Math.max(0, newy), 720 + 40);
+					target.x = Math.min(Math.max(0, newx), Global.windowx - 20);
+					target.y = Math.min(Math.max(0, newy), Global.windowy + 40);
 				}
 			}
 			
@@ -162,8 +162,8 @@ package systems {
 					newx = target.x + tan * (Math.cos(angleRad));
 					newy = target.y + tan * (Math.sin(angleRad));
 					
-					target.x = Math.min(Math.max(0, newx), 405 - 20);
-					target.y = Math.min(Math.max(0, newy), 720 + 40);
+					target.x = Math.min(Math.max(0, newx), Global.windowx - 20);
+					target.y = Math.min(Math.max(0, newy), Global.windowy + 40);
 				}
 			}
 		}

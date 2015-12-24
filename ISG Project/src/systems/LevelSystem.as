@@ -80,12 +80,10 @@ package systems {
 		
 		override protected function onProcess(delta:Number):void
 		{
-			if (levels.members.length > 0) {
+			if (levels.members.length > 0)
 				curLevel = levelMapper.getComponent(levels.members[0]);
-			}
-			else {
+			else
 				curLevel = null;
-			}
 			
 			if(curLevel != null) {
 				curLevel.duration -= delta;
@@ -143,7 +141,7 @@ package systems {
 			markCompletedLevels();
 		}
 		
-		public function markCompletedLevels() {
+		public function markCompletedLevels():void {
 			saveDataObject.data.completedLevels = completedLevels;
 			saveDataObject.flush();
 			for (var i:int = 0 ; i < completedLevels.length ; i++) {
@@ -181,41 +179,38 @@ package systems {
 			trace("win");
 		}
 		
-		private function clickHandler(event:MouseEvent):void {
-			var x:int = event.localX;
-			var y:int = event.localY;
+		
+		private function loadLevelXY(x:int, y:int):void {
 			var n:int = menuButtons.members.length;
 			for (var i:int = 0 ; i < n ; i++) {
-				var e:IEntity = menuButtons.members[i];
-				var tr:Transform = transformMapper.getComponent(e);
-				var mB:MenuButton = menuButtonMapper.getComponent(e);
-				if (x >= tr.x && x <= tr.x + 100 && y >= tr.y && y <= tr.y + 100 && mB.level != 0) {
-					loadLevel(mB.level);
-					return;
-				}
+					var e:IEntity = menuButtons.members[i];
+					var tr:Transform = transformMapper.getComponent(e);
+					var mB:MenuButton = menuButtonMapper.getComponent(e);
+					if (x >= tr.x && x <= tr.x + Global.buttonsize && y >= tr.y && y <= tr.y + Global.buttonsize && mB.level != 0) {
+						loadLevel(mB.level);
+						return;
+					}
 			}
 		}
 		
+		private function clickHandler(event:MouseEvent):void {
+			var x:int = event.localX;
+			var y:int = event.localY;
+			loadLevelXY(x, y);
+		}
+		
 		private function keyHandler(event:KeyboardEvent):void {
+			//back to menu
 			if (event.keyCode == Keyboard.ESCAPE) {
 				loadMenu();
 				return;
 			}
+			//select level with ship
 			if (event.keyCode == Keyboard.SPACE) {
-				var ship:IEntity = ships.members[0];
-				var x:int = (transformMapper.getComponent(ship)).x;
-				var y:int = (transformMapper.getComponent(ship)).y;
-				var n:int = menuButtons.members.length;
-				for (var i:int = 0 ; i < n ; i++) {
-					var e:IEntity = menuButtons.members[i];
-					var tr:Transform = transformMapper.getComponent(e);
-					var mB:MenuButton = menuButtonMapper.getComponent(e);
-					if (x >= tr.x && x <= tr.x + 100 && y >= tr.y && y <= tr.y + 100 && mB.level != 0) {
-						loadLevel(mB.level);
-						return;
-					}
-				}
+				var tr:Transform = transformMapper.getComponent(ships.members[0]);
+				loadLevelXY(tr.x + Global.shipsize / 2, tr.y);
 			}
+			//reset progression
 			if (event.keyCode == Keyboard.DELETE) {
 				completedLevels = new Array(0, 0, 0, 0, 0, 0);
 				saveDataObject.data.completedLevels = completedLevels;
