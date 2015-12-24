@@ -35,6 +35,9 @@ package systems {
 		private var ui:Family;
 		private var curLevel:Level;
 		
+		private var url:String;
+		private var name:String;
+		
 		private var levelMapper:IComponentMapper;
 		private var siMapper:IComponentMapper;
 		private var menuButtonMapper:IComponentMapper;
@@ -121,14 +124,14 @@ package systems {
 			if (n != 1) {
 				if (completedLevels[n - 2] != 0) {
 					clearLevel();
-					var url:String = 'xml/level' + n + '.entityBundle.xml';
+					url = 'xml/level' + n + '.entityBundle.xml';
 					var name:String = 'level' + n;
 					EntityFactory.createResourcedEntity(world.getEntityManager(), url, name);
 				}
 			} else {
 				clearLevel();
-				var url:String = 'xml/level' + n + '.entityBundle.xml';
-				var name:String = 'level' + n;
+				url = 'xml/level' + n + '.entityBundle.xml';
+				name = 'level' + n;
 				EntityFactory.createResourcedEntity(world.getEntityManager(), url, name);
 			}
 		}
@@ -150,7 +153,7 @@ package systems {
 			}
 		}
 		
-		public function markLevel(xL:int, yL:int) {
+		public function markLevel(xL:int, yL:int):void {
 			var e:IEntity = entityManager.create();
 			entityManager.addComponent (e, UI, { } );
 			entityManager.addComponent (e, Transform,  {x:xL, y:yL} );
