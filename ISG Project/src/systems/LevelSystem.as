@@ -38,6 +38,8 @@ package systems {
 		private var url:String;
 		private var name:String;
 		
+		private var toMarkLevels:Boolean = false;
+		
 		private var levelMapper:IComponentMapper;
 		private var siMapper:IComponentMapper;
 		private var menuButtonMapper:IComponentMapper;
@@ -80,6 +82,8 @@ package systems {
 		
 		override protected function onProcess(delta:Number):void
 		{
+			markCompletedLevels();
+			
 			if (levels.members.length > 0)
 				curLevel = levelMapper.getComponent(levels.members[0]);
 			else
@@ -131,16 +135,30 @@ package systems {
 			clearLevel();
 			trace("loading menu");
 			EntityFactory.createResourcedEntity(world.getEntityManager(), 'xml/menu.entityBundle.xml', "menu");
-			markCompletedLevels();
+			toMarkLevels = true;
 		}
 		
 		public function markCompletedLevels():void {
-			saveDataObject.data.completedLevels = completedLevels;
-			saveDataObject.flush();
-			
-			for (var i:int = 0 ; i < completedLevels.length ; i++) {
-				markLevel(25 + (i % 3) * 125, Math.floor(i / 3) * 125 + 200, completedLevels[i]);
+			if(toMarkLevels) {
+				saveDataObject.data.completedLevels = completedLevels;
+				saveDataObject.flush();
+				
+				var n:int = menuButtons.members.length;
+				if(n==completedLevels.length) {
+					for (var i:int = 0 ; i < n ; i++) {
+						var e:IEntity = menuButtons.members[i];
+						var tr:Transform = transformMapper.getComponent(e);
+						var mB:MenuButton = menuButtonMapper.getComponent(e);
+						
+						markLevel(tr.x, tr.y, completedLevels[mB.level - 1]);
+					}
+					toMarkLevels = false;
+				}
 			}
+			/*
+			for (var i:int = 0 ; i < completedLevels.length ; i++) {
+				markLevel(25 + (i % 3) * 125, Math.floor(i / 3) * 125 + 200, comp	letedLevels[i]);
+			}*/
 		}
 		
 		public function addUI(_x:int, _y:int, _source:String, _id:String):void {

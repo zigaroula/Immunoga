@@ -18,6 +18,8 @@
 	<a name="Spawn" class="components.Game.Spawn" />
 	<a name="Level" class="components.Game.Level" />
 	<a name="MenuButton" class="components.Game.MenuButton" />
+	
+	<a name="UI" class="components.Game.UI" />
 
 
 	<!-- Définition des entités -->
@@ -25,7 +27,7 @@
 		<Transform x="0" y="0" rotation="0" visible="true"  alpha="1"/>
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/title.png" id="title" />
-		<MenuButton level="1" />
+		<UI />
 	</e>
 	
 	<e>
