@@ -128,32 +128,29 @@ package systems {
 			
 			fixTextures(infected);
 			
-			processCollisions(cx/2, 	cx,		macrophages, bacteries, aDamagesB, 49);
-			processCollisions(cx/2, 	cx, 		macrophages, toxines, aDamagesB, 100);
-			processCollisions(cx/2, 	cx,		macrophages, dechets, aDamagesB, 100);
-			processCollisions(cx/2,	cx,		macrophages, dechets, aDamagesB, 100);
+			processCollisions(cx/2, 	cx,			macrophages, 	bacteries, 		aDamagesB, 34, true);
+			processCollisions(cx/2, 	cx, 		macrophages, 	toxines, 		aDamagesB, 100, false);
+			processCollisions(cx/2, 	cx,			macrophages, 	dechets, 		aDamagesB, 100, false);
 			
-			processCollisions(cx,		cx, 		lymphB, bacteries, aSpecializes, Global.LYMPHBBACT);
-			processCollisions(cx,		cx, 		lymphB, virus, aSpecializes, Global.LYMPHBVIR);
+			processCollisions(cx, 		cx, 		lymphB, 		bacteries, 		aSpecializes, Global.LYMPHBBACT, true);
+			processCollisions(cx, 		cx, 		lymphB, 		virus, 			aSpecializes, Global.LYMPHBVIR, true);
 			
-			processCollisions(cx, 		cx, 		lymphBBact, bacteries, aDamagesB, 80);
-			processCollisions(cx, 		cx, 		lymphBVir, virus, aDamagesB, 80);
+			processCollisions(cx, 		cx, 		lymphBBact, 	bacteries, 		aDamagesB, 80, false);
+			processCollisions(cx, 		cx, 		lymphBVir, 		virus, 			aDamagesB, 80, false);
 			
-			processCollisions(cx/2,	0,			lymphT, celStructInf, aDamagesB, 100);
-			processCollisions(cx/2, 	cx,		lymphT, bactInf, aDamagesB, 1);
+			processCollisions(cx/2,		0, 			lymphT, 		celStructInf, 	aDamagesB, 100, true);
+			processCollisions(cx/2, 	cx,			lymphT, 		bactInf, 		aDamagesB, 100, true);
 			
-			processCollisions(0, 		cx,		toxines, celStruct, aDamagesB, 1);
+			processCollisions(cx/2, 	0, 			virus, 			bacteries, 		aInfectsB, Global.BACTERIE, false);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			macrophages, 	aInfectsB, Global.MACROPHAGE, false);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphT, 		aInfectsB, Global.LYMPHOCYTET, false);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			celStruct, 		aInfectsB, Global.CELSTRUCT, true);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphBBact, 	aInfectsB, Global.LYMPHBBACT, false);
 			
-			processCollisions(cx/2, 	0, 		virus, bacteries, aInfectsB, Global.BACTERIE);
-			processCollisions(cx/2, -1 * cx, 	virus, macrophages, aInfectsB, Global.MACROPHAGE);
-			processCollisions(cx/2, -1 * cx, 	virus, lymphT, aInfectsB, Global.LYMPHOCYTET);
-			processCollisions(cx/2, -1 * cx, 	virus, celStruct, aInfectsB, Global.CELSTRUCT);
-			processCollisions(cx/2, -1 * cx, 	virus, lymphBBact, aInfectsB, Global.LYMPHBBACT);
-			
-			processCollisions(cx/2, -1 * cx, 	toxines, celStruct, aDamagesB, 1);
-			processCollisions(cx/2, -1 * cx, 	toxines, lymphB, aDamagesB, 10);
-			processCollisions(cx/2, -2 * cx, 	toxines, lymphBBact, aDamagesB, 10);
-			processCollisions(cx/2, 	cx,		toxines, lymphBVir, aDamagesB, 10);			
+			processCollisions(cx/2, 	-1 * cx, 	toxines, 		celStruct, 		aDamagesB, 10, true);
+			processCollisions(cx/2, 	-1 * cx, 	toxines, 		lymphB, 		aDamagesB, 10, true);
+			processCollisions(cx/2, 	-2 * cx, 	toxines, 		lymphBBact, 	aDamagesB, 10, true);
+			processCollisions(cx/2, 	cx,			toxines, 		lymphBVir, 		aDamagesB, 10, true);			
 		}
 		
 		private function fixTextures(f1:Family):void {
@@ -173,7 +170,7 @@ package systems {
 		}
  
 		//family f1 interacts with family f2 according to interaction function
-		private function processCollisions(range:int, offset:int, f1:Family, f2:Family, interaction:Function, attr:int):void {
+		private function processCollisions(range:int, offset:int, f1:Family, f2:Family, interaction:Function, attr:int, die:Boolean):void {
 			var n1:int = f1.members.length;
 			var n2:int = f2.members.length;
 			
@@ -185,7 +182,7 @@ package systems {
 					var b:IEntity = f2.members[j];
 					var tb:Transform = transformMapper.getComponent(b);
 					if (collision(range, offset, ta, tb)) {
-						interaction(a, b, attr);
+						interaction(a, b, attr, die);
 					}
 				}
 			}
@@ -205,30 +202,35 @@ package systems {
 		}
 		
 		//b.hp -= dmg
-		private function aDamagesB(a:IEntity, b:IEntity, dmg:int) :void{
+		private function aDamagesB(a:IEntity, b:IEntity, dmg:int, die:Boolean) :void{
 			var si:SIEntity = siMapper.getComponent(b);
-				//entityManager.killEntity(a);
+			if (die)
+				entityManager.killEntity(a);
 				
-				si.hp -= dmg;
-				if(si.hp < 0)
-					entityManager.killEntity(b);
+			si.hp -= dmg;
+			if(si.hp < 0)
+				entityManager.killEntity(b);
 		}
 		
 		//kills b, instantiate a new b based on type
-		private function aSpecializes(a:IEntity, b:IEntity, type:int):void {
+		private function aSpecializes(a:IEntity, b:IEntity, type:int, die:Boolean):void {
 			var tr:Transform	= transformMapper.getComponent(a);
 			
 			var x:int = tr.x;
 			var y:int = tr.y;
+			
+			if (die)
+				entityManager.killEntity(a);
 				
-			entityManager.killEntity(a);
 			EntityFactory.createEntityOfType(entityManager, x, y+10, type);	
 		}
 		
 		//kills a, adds Infection component to b, changes b texture based on type
-		private function aInfectsB(a:IEntity, b:IEntity, type:int):void {
+		private function aInfectsB(a:IEntity, b:IEntity, type:int, die:Boolean):void {
 			//trace("infect " + type);
-			entityManager.killEntity(a);
+			if (die)
+				entityManager.killEntity(a);
+				
 			entityManager.addComponent(b, Infection, { } );
 			
 			entityManager.removeComponent(b, textureMapper.gene);
@@ -241,13 +243,13 @@ package systems {
 					entityManager.addComponent (b, TextureResource, { source:"pictures/bactery_infected.png", id:"bactInf" } );
 					break;
 				case Global.LYMPHOCYTET:
-					entityManager.addComponent (b, TextureResource, { source:"pictures/tCell_infected.png", id:"macrophage" } );
+					entityManager.addComponent (b, TextureResource, { source:"pictures/tCell_infected.png", id:"tCellInf" } );
 					break;
 				case Global.CELSTRUCT:
-					entityManager.addComponent (b, TextureResource, { source:"pictures/structCell_infected.png", id:"macrophage" } );
+					entityManager.addComponent (b, TextureResource, { source:"pictures/structCell_infected.png", id:"structCellInf" } );
 					break;
 				case Global.LYMPHBBACT:
-					entityManager.addComponent (b, TextureResource, { source:"pictures/lymphBBact_infected.png", id:"macrophage" } );
+					entityManager.addComponent (b, TextureResource, { source:"pictures/lymphBBact_infected.png", id:"lymphBBactInf" } );
 					break;
 			}
 			entityManager.removeComponent(b, layerMapper.gene); //remove the layered then add it next frame to reset the texture displayed

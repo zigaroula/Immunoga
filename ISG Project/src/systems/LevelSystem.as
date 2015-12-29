@@ -33,6 +33,7 @@ package systems {
 		private var siEntities:Family;
 		private var ships:Family;
 		private var ui:Family;
+		private var infectedCells:Family;
 		private var curLevel:Level;
 		
 		private var url:String;
@@ -62,6 +63,7 @@ package systems {
 			siEntities = entityManager.getFamily(allOfGenes(SIEntity));
 			ships = entityManager.getFamily(allOfGenes(Ship));
 			ui =  entityManager.getFamily(allOfGenes(UI));
+			infectedCells = entityManager.getFamily(allOfGenes(CelluleStructure, Infection));
 			
 			levelMapper = geneManager.getComponentMapper(Level);
 			siMapper = geneManager.getComponentMapper(SIEntity);
@@ -69,7 +71,7 @@ package systems {
 			transformMapper = geneManager.getComponentMapper(Transform);
 			
 			// Load save
-			saveDataObject = SharedObject.getLocal("test");
+			saveDataObject = SharedObject.getLocal("lul");
 			if (saveDataObject.data.completedLevels == null) {
 				completedLevels = new Array(2, 0, 0, 0, 0, 0); //0,1,2 = locked, completed, unlocked
 				saveDataObject.data.completedLevels = completedLevels;
@@ -93,11 +95,15 @@ package systems {
 				curLevel.duration -= delta;
 				
 				if (curLevel.duration < 0) {
-					win();
+					if (infectedCells.members.length == 0) {
+						win();
+					} else {
+						lose();
+					}
 					loadMenu();
 				}
 				
-				if (curLevel.nCelStruct > celStruct.members.length) {
+				if (celStruct.members.length == 0) {
 					lose();
 					loadMenu();
 				}	
@@ -179,8 +185,11 @@ package systems {
 			completedLevels[number - 1] = 1;
 			
 			//unlock next level
-			if(number < completedLevels.length)
-				completedLevels[number] = 2;
+			if (number < completedLevels.length) {
+				if (completedLevels[number] != 1) {
+					completedLevels[number] = 2;
+				}
+			}
 			
 			trace("win level " + number);
 		}
