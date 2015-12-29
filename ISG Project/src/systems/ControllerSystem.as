@@ -57,12 +57,27 @@ package systems {
 				tr.y = newValue(tr.y,	speed,		0,	Global.windowy,	2 * Global.shipsize / 3);
 				
 			if (isKeyDown(Keyboard.SPACE) && levels.members.length != 0) {
-				if (cpt>=5) {
+				if (cpt >= cptType(type) ) {
 					EntityFactory.createEntityOfType(entityManager, tr.x + Global.shipsize/2, tr.y, type);
 					cpt = 0;
 				}
 				cpt++;
 			}
+		}
+		
+		private function cptType(type:int):int {
+			switch(type) {
+				case Global.MACROPHAGE:
+					return 8; 
+					break;
+				case Global.LYMPHOCYTEB:
+					return 20;
+					break;
+				case Global.LYMPHOCYTET:
+					return 20;
+					break;
+			}
+			return 8;
 		}
 		
 		private function newValue(v:int, add:int, vmin:int , vmax:int, offset:int):int {

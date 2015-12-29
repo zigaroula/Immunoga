@@ -85,7 +85,7 @@ package systems {
 				var si:SIEntity = siMapper.getComponent(e);
 				
 				if (si.hp <= 0) {
-					trace("death");
+					//trace("death");
 					x = tr.x + 15;
 					y = tr.y + 15;
 					
