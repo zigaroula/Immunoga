@@ -141,11 +141,11 @@ package systems {
 			processCollisions(cx/2,		0, 			lymphT, 		celStructInf, 	aDamagesB, 100, true);
 			processCollisions(cx/2, 	cx,			lymphT, 		bactInf, 		aDamagesB, 100, true);
 			
-			processCollisions(cx/2, 	0, 			virus, 			bacteries, 		aInfectsB, Global.BACTERIE, true);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			macrophages, 	aInfectsB, Global.MACROPHAGE, true);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphT, 		aInfectsB, Global.LYMPHOCYTET, true);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			celStruct, 		aInfectsB, Global.CELSTRUCT, true);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphBBact, 	aInfectsB, Global.LYMPHBBACT, true);
+			processCollisions(cx/2, 	0, 			bacteries, 			virus,		bInfectedByA, Global.BACTERIE, true);
+			processCollisions(cx/2, 	 cx, 			macrophages, 	virus, 	bInfectedByA, Global.MACROPHAGE, true);
+			processCollisions(cx/2, 	 cx, 	 		lymphT, 			virus, 		bInfectedByA, Global.LYMPHOCYTET, true);
+			processCollisions(cx/2, 	1 * cx, 	 	celStruct, 			virus, 		bInfectedByA, Global.CELSTRUCT, true);
+			processCollisions(cx/2, 	1 * cx, 	 	lymphBBact, 	virus, 	bInfectedByA, Global.LYMPHBBACT, true);
 			
 			processCollisions(cx/2, 	-1 * cx, 	toxines, 		celStruct, 		aDamagesB, 10, true);
 			processCollisions(cx/2, 	-1 * cx, 	toxines, 		lymphB, 		aDamagesB, 10, true);
@@ -227,7 +227,7 @@ package systems {
 		}
 		
 		//kills a, adds Infection component to b, changes b texture based on type
-		private function aInfectsB(a:IEntity, b:IEntity, type:int, die:Boolean):void {
+		private function bInfectedByA(b:IEntity, a:IEntity, type:int, die:Boolean):void {
 			//trace("infect " + type);
 			if (die)
 				entityManager.killEntity(a);

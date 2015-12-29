@@ -23,7 +23,7 @@ package systems {
 		private var transformMapper:IComponentMapper;
 		private var speed:Number = 10;			
 		private var hash:Object = { };
-		private var cpt:Number = 0;
+		private var cpt:Number = 20;
 		private var type:int = Global.MACROPHAGE;
 		
 		public function ControllerSystem(stage:Stage) {
@@ -68,7 +68,7 @@ package systems {
 		private function cptType(type:int):int {
 			switch(type) {
 				case Global.MACROPHAGE:
-					return 8; 
+					return 6; 
 					break;
 				case Global.LYMPHOCYTEB:
 					return 20;
@@ -77,7 +77,7 @@ package systems {
 					return 20;
 					break;
 			}
-			return 8;
+			return 6;
 		}
 		
 		private function newValue(v:int, add:int, vmin:int , vmax:int, offset:int):int {
