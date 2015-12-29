@@ -27,6 +27,7 @@ package systems {
 		private var infectedDefenses:Family;
 		private var notInfectedDefenses:Family;
 		private var notInfectedBacteries:Family;
+		private var siEntities:Family;
 		
 		private var transformMapper:IComponentMapper;
 		private var siMapper:IComponentMapper;
@@ -44,106 +45,74 @@ package systems {
 			notInfectedBacteries = entityManager.getFamily(allOfGenes(Bacterie), noneOfGenes(Infection));
 			infectedBacteries = entityManager.getFamily(allOfGenes(Bacterie, Infection));
 			
+			siEntities = entityManager.getFamily(allOfGenes(SIEntity));
+			
 			transformMapper = geneManager.getComponentMapper(Transform);
 			siMapper = geneManager.getComponentMapper(SIEntity);
 		}
 		
 		override protected function onProcess(delta:Number):void {
+			deathTriggers(infectedDefenses, spawnDechets1);
+			deathTriggers(infectedDefenses, spawnVirus);
 			
-			//Infected defenses
-			var familySize:int = infectedDefenses.members.length;
+			deathTriggers(infectedBacteries, spawnDechets2);
+			deathTriggers(infectedBacteries, spawnVirus);
+			
+			deathTriggers(notInfectedDefenses, spawnDechets2);
+			
+			deathTriggers(notInfectedBacteries, spawnDechets1);
+			
+			killNegHp();
+		}
+		
+		public function killNegHp():void {
+			var familySize:int = siEntities.members.length;
 			for (var i:int = 0; i < familySize; i++) {
-				var e:IEntity = infectedDefenses.members[i];
+				var e:IEntity = siEntities.members[i];
+				var si:SIEntity = siMapper.getComponent(e);
+				
+				if (si.hp <= 0)
+					entityManager.killEntity(e);
+			}
+		}
+		
+		public function deathTriggers(f:Family, callback:Function):void  {
+			var familySize:int = f.members.length;
+			for (var i:int = 0; i < familySize; i++) {
+				var e:IEntity = f.members[i];
 				
 				var tr:Transform = transformMapper.getComponent(e);
 				var si:SIEntity = siMapper.getComponent(e);
 				
-				if (si.hp < 0) {
+				if (si.hp <= 0) {
+					trace("death");
 					x = tr.x + 15;
 					y = tr.y + 15;
 					
-					entityManager.killEntity(e);
-					
-					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
-					EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
-					EntityFactory.createDechet(entityManager, x     , y + 11, x     , y + 11, 3);
-					EntityFactory.createDechet(entityManager, x - 11, y     , x - 11, y     , 1);
-					EntityFactory.createDechet(entityManager, x     , y     , x     , y     , 2);
-					
-					EntityFactory.createVirus(entityManager, x, y, x     , y - 11);
-					EntityFactory.createVirus(entityManager, x, y, x + 11, y     );
-					EntityFactory.createVirus(entityManager, x, y, x     , y + 11);
-					EntityFactory.createVirus(entityManager, x, y, x - 11, y     );
-					EntityFactory.createVirus(entityManager, x, y, x     , y     );
+					callback(x, y);
 				}
-			}
-			
-			//Infected bacteries
-			familySize = infectedBacteries.members.length;
-			for (i = 0; i < familySize; i++) {
-				e = infectedBacteries.members[i];
-				tr = transformMapper.getComponent(e);
-				si = siMapper.getComponent(e);
-				
-				if (si.hp < 0) {
-					x = tr.x + 15;
-					y = tr.y + 15;
-					
-					entityManager.killEntity(e);
-					
-					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
-					EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
-					
-					EntityFactory.createVirus(entityManager, x, y, x     , y - 11);
-					EntityFactory.createVirus(entityManager, x, y, x + 11, y     );
-					EntityFactory.createVirus(entityManager, x, y, x     , y + 11);
-					EntityFactory.createVirus(entityManager, x, y, x - 11, y     );
-					EntityFactory.createVirus(entityManager, x, y, x     , y     );	
-				}
-				
-			}
-			
-			//Not infected defenses
-			familySize = notInfectedDefenses.members.length;
-			for (i = 0; i < familySize; i++) {
-				e = notInfectedDefenses.members[i];
-				
-				tr = transformMapper.getComponent(e);
-				si = siMapper.getComponent(e);
-				
-				if (si.hp < 0) {
-					x = tr.x + 15;
-					y = tr.y + 15;
-					
-					entityManager.killEntity(e);
-					
-					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
-					EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
-					EntityFactory.createDechet(entityManager, x     , y + 11, x     , y + 11, 3);
-					EntityFactory.createDechet(entityManager, x - 11, y     , x - 11, y     , 1);
-					EntityFactory.createDechet(entityManager, x     , y     , x     , y     , 2);
-				}
-			}
-			
-			//Not infected bacteries
-			familySize = infectedBacteries.members.length;
-			for (i = 0; i < familySize; i++) {
-				e = infectedBacteries.members[i];
-				tr = transformMapper.getComponent(e);
-				si = siMapper.getComponent(e);
-				
-				if (si.hp < 0) {
-					x = tr.x + 15;
-					y = tr.y + 15;
-					
-					entityManager.killEntity(e);
-					
-					EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
-					EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
-				}	
-			}
+			}		
+		}
+	
+		public function spawnDechets1(x:int, y:int):void {
+			EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
+			EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
+			EntityFactory.createDechet(entityManager, x     , y + 11, x     , y + 11, 3);
+			EntityFactory.createDechet(entityManager, x - 11, y     , x - 11, y     , 1);
+			EntityFactory.createDechet(entityManager, x     , y     , x     , y     , 2);
 		}
 		
+		public function spawnDechets2(x:int, y:int):void {
+			EntityFactory.createDechet(entityManager, x     , y - 11, x     , y - 11, 1);
+			EntityFactory.createDechet(entityManager, x + 11, y     , x + 11, y     , 2);
+		}
+		
+		public function spawnVirus(x:int, y:int):void {
+			EntityFactory.createVirus(entityManager, x, y, x     , y - 11);
+			EntityFactory.createVirus(entityManager, x, y, x + 11, y     );
+			EntityFactory.createVirus(entityManager, x, y, x     , y + 11);
+			EntityFactory.createVirus(entityManager, x, y, x - 11, y     );
+			EntityFactory.createVirus(entityManager, x, y, x     , y     );
+		}
 	}
-
 }

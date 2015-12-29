@@ -141,11 +141,11 @@ package systems {
 			processCollisions(cx/2,		0, 			lymphT, 		celStructInf, 	aDamagesB, 100, true);
 			processCollisions(cx/2, 	cx,			lymphT, 		bactInf, 		aDamagesB, 100, true);
 			
-			processCollisions(cx/2, 	0, 			virus, 			bacteries, 		aInfectsB, Global.BACTERIE, false);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			macrophages, 	aInfectsB, Global.MACROPHAGE, false);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphT, 		aInfectsB, Global.LYMPHOCYTET, false);
+			processCollisions(cx/2, 	0, 			virus, 			bacteries, 		aInfectsB, Global.BACTERIE, true);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			macrophages, 	aInfectsB, Global.MACROPHAGE, true);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphT, 		aInfectsB, Global.LYMPHOCYTET, true);
 			processCollisions(cx/2, 	-1 * cx, 	virus, 			celStruct, 		aInfectsB, Global.CELSTRUCT, true);
-			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphBBact, 	aInfectsB, Global.LYMPHBBACT, false);
+			processCollisions(cx/2, 	-1 * cx, 	virus, 			lymphBBact, 	aInfectsB, Global.LYMPHBBACT, true);
 			
 			processCollisions(cx/2, 	-1 * cx, 	toxines, 		celStruct, 		aDamagesB, 10, true);
 			processCollisions(cx/2, 	-1 * cx, 	toxines, 		lymphB, 		aDamagesB, 10, true);
@@ -183,6 +183,7 @@ package systems {
 					var tb:Transform = transformMapper.getComponent(b);
 					if (collision(range, offset, ta, tb)) {
 						interaction(a, b, attr, die);
+						break;
 					}
 				}
 			}
@@ -208,8 +209,8 @@ package systems {
 				entityManager.killEntity(a);
 				
 			si.hp -= dmg;
-			if(si.hp < 0)
-				entityManager.killEntity(b);
+			//if(si.hp < 0)
+			//	entityManager.killEntity(b);
 		}
 		
 		//kills b, instantiate a new b based on type
