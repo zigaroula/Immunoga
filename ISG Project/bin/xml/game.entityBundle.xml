@@ -31,6 +31,10 @@
 		<Layer id="shipLayer" index="2" />
 	</e>
 	<e>
+		<Transform x="0" y="580" />
+		<Layer id="tutoLayer" index="3" />
+	</e>
+	<e>
 		<Transform x="0" y="-720" />
 		<Layered layerId="background" />
 		<TextureResource source="pictures/background.png" id="background"  />

@@ -27,6 +27,15 @@
 		<Level duration="20000"  nCelStruct="1" number="1" />
 	</e>
 	
+
+	<e>
+		<Transform x="0" y=" 0" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="tutoLayer" />
+		<TextureResource source="pictures/title.png" id="title" />
+		<Spawn timer="-3000" />
+		<UI />
+	</e>
+	
 	<!-- Structural Cells -->
 	
 	<e>

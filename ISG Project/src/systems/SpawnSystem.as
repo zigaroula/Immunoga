@@ -35,11 +35,23 @@ package systems {
 				var tr:Transform = transformMapper.getComponent(e);
 				var sp:Spawn = spawnMapper.getComponent(e);
 				
-				sp.timer -= delta;
+				
+				if(sp.timer >= 0) {
+					sp.timer -= delta;
+										
+					if (sp.timer < 0) {
+						entityManager.removeComponent(e, spawnMapper.gene);
+						tr.visible = true;
+					}
+				}
+				else {
+					sp.timer += delta;
 					
-				if (sp.timer < 0) {
-					entityManager.removeComponent(e, spawnMapper.gene);
-					tr.visible = true;
+					tr.alpha = Math.min (1,  -1 * sp.timer / 300);
+					
+					if (sp.timer >= 0) {
+						entityManager.killEntity(e);
+					}
 				}
 			}
 		}
