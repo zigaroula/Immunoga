@@ -15,6 +15,7 @@ package systems {
 	import com.lip6.genome.geography.move.component.TargetPos;
 	import com.ktm.genome.resource.component.TextureResource;
 	import com.ktm.genome.render.component.Layered;
+	import com.lip6.genome.geography.move.component.Speed;
 	
 	import components.Game.Ship;
 	import components.Game.Spawn;
@@ -60,12 +61,14 @@ package systems {
 		
 		//infect
 		private var infected:Family;
+		private var infectedToFix:Family;
 		private var celStruct:Family;
 		private var celStructInf:Family;
 		private var bactInf :Family;
 
 		private var targetMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
+		private var speedMapper:IComponentMapper;
 		private var siMapper:IComponentMapper;
 		
 		private var textureMapper:IComponentMapper;
@@ -100,7 +103,9 @@ package systems {
 			celStructInf    = entityManager.getFamily(noneOfGenes(Spawn), 					allOfGenes(CelluleStructure, Infection ));
 			bactInf   		= entityManager.getFamily(noneOfGenes(Spawn), 					allOfGenes(CelluleStructure, Infection ));
 			
-			infected   		= entityManager.getFamily(noneOfGenes(Spawn, Layered), 	allOfGenes(Infection, TargetPos));
+			infectedToFix   		= entityManager.getFamily(noneOfGenes(Spawn, Layered), 	allOfGenes(Infection, TargetPos));
+			infected   		= entityManager.getFamily(noneOfGenes(Spawn), 	allOfGenes(Infection, TargetPos));
+
 		
 			transformMapper = geneManager.getComponentMapper(Transform);
 			targetMapper 		= geneManager.getComponentMapper(TargetPos);
@@ -109,6 +114,7 @@ package systems {
 			textureMapper 	= geneManager.getComponentMapper(TextureResource);
 			lymphbMapper 	= geneManager.getComponentMapper(LymphocyteB);
 			layerMapper 		= geneManager.getComponentMapper(Layered);
+			speedMapper		= geneManager.getComponentMapper(Speed);
 		}
 		
 		override protected function onProcess(delta:Number):void
@@ -126,7 +132,7 @@ package systems {
 					entityManager.killEntity(e);
 			}
 			
-			fixTextures(infected);
+			fixTextures(infectedToFix);
 			
 			processCollisions(cx/2, 	cx,			macrophages, 	bacteries, 		aDamagesB, 34, true);
 			processCollisions(cx/2, 	cx, 		macrophages, 	toxines, 		aDamagesB, 100, false);
@@ -139,7 +145,9 @@ package systems {
 			processCollisions(cx, 		cx, 		lymphBVir, 		virus, 			aDamagesB, 80, false);
 			
 			processCollisions(cx/2,		0, 			lymphT, 		celStructInf, 	aDamagesB, 100, true);
-			processCollisions(cx/2, 	cx,			lymphT, 		bactInf, 		aDamagesB, 100, true);
+			processCollisions(cx / 2, 	cx,			lymphT, 		bactInf, 		aDamagesB, 100, true);
+			processCollisions(cx/2, 	cx,			lymphT, 		infected, 		aDamagesB, 100, true);
+
 			
 			processCollisions(cx/2, 	0, 			bacteries, 			virus,		bInfectedByA, Global.BACTERIE, true);
 			processCollisions(cx/2, 	 cx, 			macrophages, 	virus, 	bInfectedByA, Global.MACROPHAGE, true);
@@ -232,7 +240,17 @@ package systems {
 			if (die)
 				entityManager.killEntity(a);
 				
-			entityManager.addComponent(b, Infection, { } );
+			
+			var target:TargetPos = targetMapper.getComponent(b);
+			var tr:Transform = transformMapper.getComponent(b);
+			var speed:Speed = speedMapper.getComponent(b);
+			
+			speed.velocity = 0.5;
+			
+			target.x = tr.x;
+			target.y = tr.y;
+			
+			entityManager.addComponent(b, Infection, { x:tr.x, y:tr.y } );
 			
 			entityManager.removeComponent(b, textureMapper.gene);
 			

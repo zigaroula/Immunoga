@@ -14,6 +14,10 @@ package systems {
 	import components.Intrus.Toxine;
 	import components.Intrus.Dechet;
 	import components.Game.Spawn;
+	import components.Infection;
+	import components.SystemeImmunitaire.CelluleStructure;
+	import components.SystemeImmunitaire.Macrophage;
+	import com.ktm.genome.render.component.Layered;
 	
 	public class RandomMovingSystem extends System {
 		
@@ -21,6 +25,8 @@ package systems {
 		private var movingVirus:Family;
 		private var movingToxines:Family;
 		private var movingDechets:Family;
+		private var infected:Family
+		private var celStruct:Family;
 		
 		private var targetMapper:IComponentMapper;
 		private var transformMapper:IComponentMapper;
@@ -33,6 +39,9 @@ package systems {
 			movingVirus = entityManager.getFamily(	allOfGenes(Transform, TargetPos, Virus), noneOfGenes(Spawn));
 			movingToxines = entityManager.getFamily(	allOfGenes(Transform, TargetPos, Toxine), noneOfGenes(Spawn));
 			movingDechets = entityManager.getFamily(	allOfGenes(Transform, TargetPos, Dechet), noneOfGenes(Spawn));
+			infected = entityManager.getFamily(	allOfGenes(Transform, TargetPos, Infection, Layered), noneOfGenes(Spawn));
+			celStruct = entityManager.getFamily( allOfGenes(Transform, TargetPos, CelluleStructure), noneOfGenes(Spawn, Infection));
+			
 			transformMapper = geneManager.getComponentMapper(Transform);
 			targetMapper = geneManager.getComponentMapper(TargetPos);
 			
@@ -161,6 +170,43 @@ package systems {
 					
 					newx = target.x + tan * (Math.cos(angleRad));
 					newy = target.y + tan * (Math.sin(angleRad));
+					
+					target.x = Math.min(Math.max(0, newx), Global.windowx - 20);
+					target.y = Math.min(Math.max(0, newy), Global.windowy + 40);
+				}
+			}
+			
+			//cells
+			familySize = infected.members.length;
+			for (i = 0 ; i < familySize ; i++) {
+				e = infected.members[i];
+				tr = transformMapper.getComponent(e);
+				target = targetMapper.getComponent(e);
+				
+				elementMapper = geneManager.getComponentMapper(Infection);
+				var infect:Infection= elementMapper.getComponent(e);
+				
+				if (target.x == tr.x && target.y == tr.y) {					
+					newx = infect.x -30 + Math.random() * 60;
+					newy = infect.y - 30 + Math.random() * 60;
+					
+					target.x = Math.min(Math.max(0, newx), Global.windowx - 20);
+					target.y = Math.min(Math.max(0, newy), Global.windowy + 40);
+				}
+			}
+			
+			familySize = celStruct.members.length;
+			for (i = 0 ; i < familySize ; i++) {
+				e = celStruct.members[i];
+				tr = transformMapper.getComponent(e);
+				target = targetMapper.getComponent(e);
+				
+				elementMapper = geneManager.getComponentMapper(CelluleStructure);
+				var cel:CelluleStructure = elementMapper.getComponent(e);
+				
+				if (target.x == tr.x && target.y == tr.y) {					
+					newx = cel.x -30 + Math.random() * 60;
+					newy = cel.y - 30 + Math.random() * 60;
 					
 					target.x = Math.min(Math.max(0, newx), Global.windowx - 20);
 					target.y = Math.min(Math.max(0, newy), Global.windowy + 40);

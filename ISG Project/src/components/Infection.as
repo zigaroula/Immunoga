@@ -3,6 +3,8 @@ package components {
 	
 	public class Infection extends Component {
 		
+		public var x:Number;
+		public var y:Number;
 	}
 
 }

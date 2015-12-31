@@ -35,7 +35,7 @@
 		<Speed velocity="0.5" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/structCell.png" id="cell" />
-		<CelluleStructure />
+		<CelluleStructure x="300" y="400" />
 		<SIEntity hp="100" />
 		<Spawn timer="0" />
 	</e>
@@ -46,7 +46,7 @@
 		<Speed velocity="0.5" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/structCell.png" id="cell" />
-		<CelluleStructure />
+		<CelluleStructure x="300" y="200" />
 		<SIEntity hp="100" />
 		<Spawn timer="0" />
 	</e>
@@ -57,7 +57,7 @@
 		<Speed velocity="0.5" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/structCell.png" id="cell" />
-		<CelluleStructure />
+		<CelluleStructure x="200" y="400" />
 		<SIEntity hp="100" />
 		<Spawn timer="0" />
 	</e>

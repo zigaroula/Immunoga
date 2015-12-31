@@ -3,7 +3,8 @@ package components.SystemeImmunitaire {
 	
 	public class CelluleStructure extends Component {
 		
-		
+		public var x:Number;
+		public var y:Number;
 	}
 
 }
