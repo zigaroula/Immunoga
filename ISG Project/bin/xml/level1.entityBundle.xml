@@ -26,13 +26,12 @@
 	<e>
 		<Level duration="20000"  nCelStruct="1" number="1" />
 	</e>
-	
 
 	<e>
 		<Transform x="0" y=" 0" rotation="0" visible="true"  alpha="1"/>
 		<Layered layerId="tutoLayer" />
-		<TextureResource source="pictures/title.png" id="title" />
-		<Spawn timer="-3000" />
+		<TextureResource source="pictures/Tutorial/level1.png" id="tutorial_level_1" />
+		<Spawn timer="-7000" />
 		<UI />
 	</e>
 	

@@ -23,6 +23,16 @@
 
 
 	<!-- Définition des entités -->
+	
+		
+	<e>
+		<Transform x="0" y=" 0" rotation="0" visible="true"  alpha="1"/>
+		<Layered layerId="tutoLayer" />
+		<TextureResource source="pictures/Tutorial/menu.png" id="tutorial_menu" />
+		<Spawn timer="-7000" />
+		<UI />
+	</e>
+	
 	<e>
 		<Transform x="0" y="0" rotation="0" visible="true"  alpha="1"/>
 		<Layered layerId="gameLayer" />

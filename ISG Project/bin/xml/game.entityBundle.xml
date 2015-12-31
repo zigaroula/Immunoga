@@ -17,6 +17,7 @@
 
 	<!-- Définition des entités -->
 	<!-- entité 1 -->
+	
 	<e>
 		<Transform x="0" y="0" />
 		<Layer id="gameLayer" index="1" />
