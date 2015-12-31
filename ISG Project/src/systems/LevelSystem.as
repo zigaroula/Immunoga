@@ -63,7 +63,7 @@ package systems {
 			siEntities = entityManager.getFamily(allOfGenes(SIEntity));
 			ships = entityManager.getFamily(allOfGenes(Ship));
 			ui =  entityManager.getFamily(allOfGenes(UI));
-			infectedCells = entityManager.getFamily(allOfGenes(CelluleStructure, Infection));
+			infectedCells = entityManager.getFamily(allOfGenes(Infection));
 			
 			levelMapper = geneManager.getComponentMapper(Level);
 			siMapper = geneManager.getComponentMapper(SIEntity);
