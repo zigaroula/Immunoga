@@ -146,14 +146,14 @@ package systems {
 			
 			processCollisions(cx/2,		0, 			lymphT, 		celStructInf, 	aDamagesB, 100, true);
 			processCollisions(cx / 2, 	cx,			lymphT, 		bactInf, 		aDamagesB, 100, true);
-			processCollisions(cx/2, 	cx,			lymphT, 		infected, 		aDamagesB, 100, true);
+			processCollisions(cx/2, 	0,			lymphT, 		infected, 		aDamagesB, 100, true);
 
 			
 			processCollisions(cx/2, 	0, 			bacteries, 			virus,		bInfectedByA, Global.BACTERIE, true);
-			processCollisions(cx/2, 	 cx, 			macrophages, 	virus, 	bInfectedByA, Global.MACROPHAGE, false);
-			processCollisions(cx/2, 	 cx, 	 		lymphT, 			virus, 		bInfectedByA, Global.LYMPHOCYTET, false);
+			processCollisions(cx/2, 	 cx, 			macrophages, 	virus, 	bInfectedByA, Global.MACROPHAGE, true);
+			processCollisions(cx/2, 	 cx, 	 		lymphT, 			virus, 		bInfectedByA, Global.LYMPHOCYTET, true);
 			processCollisions(cx/2, 	1 * cx, 	 	celStruct, 			virus, 		bInfectedByA, Global.CELSTRUCT, true);
-			processCollisions(cx/2, 	1 * cx, 	 	lymphBBact, 	virus, 	bInfectedByA, Global.LYMPHBBACT, false);
+			processCollisions(cx/2, 	1 * cx, 	 	lymphBBact, 	virus, 	bInfectedByA, Global.LYMPHBBACT, true);
 			
 			processCollisions(cx/2, 	-1 * cx, 	toxines, 		celStruct, 		aDamagesB, 10, true);
 			processCollisions(cx/2, 	-1 * cx, 	toxines, 		lymphB, 		aDamagesB, 10, true);
