@@ -19,95 +19,334 @@
 	<a name="Level" class="components.Game.Level" />
 
 
-	<!-- Définition des entités -->	
+	<!-- Level 6 - Recap number 2 -->	
+	
+	<!-- Game -->
 	
 	<e>
-		<Level duration="17000"  nCelStruct="1" number="6" />
+		<Level duration="30000"  nCelStruct="3" number="6" />
 	</e>
 	
-	<e>
-		<Transform x="100" y="10" rotation="90" visible="false"  alpha="1"/>
-		<TargetPos x="100" y="20" />
-		<Speed velocity="1" />
-		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" timer="3000" maxTimer="3000" />
-		<SIEntity hp="100" />
-		<Spawn timer="1000" />
-	</e>
+	<!-- Structural Cells -->
 	
 	<e>
-		<Transform x="300" y="400" rotation="90" visible="false"  alpha="1"/>
-		<TargetPos x="300" y="390" />
-		<Speed velocity="1" />
-		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/virus.png" id="virus" />
-		<Virus />
-		<SIEntity hp="100" />
-		<Spawn timer="1000" />
-	</e>
-	
-	<e>
-		<Transform x="300" y="400" visible="false"  alpha="1"/>
-		<TargetPos x="300" y="450" />
+		<Transform x="100" y="300" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="300" />
 		<Speed velocity="0.5" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/structCell.png" id="cell" />
-		<CelluleStructure />
+		<CelluleStructure x="300" y="400" />
+		<SIEntity hp="100" />
+		<Spawn timer="0" />
+	</e>
+	
+	<e>
+		<Transform x="300" y="350" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="350" />
+		<Speed velocity="0.5" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/structCell.png" id="cell" />
+		<CelluleStructure x="300" y="200" />
+		<SIEntity hp="100" />
+		<Spawn timer="0" />
+	</e>
+	
+	<e>
+		<Transform x="200" y="400" visible="false"  alpha="1"/>
+		<TargetPos x="100" y="400" />
+		<Speed velocity="0.5" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/structCell.png" id="cell" />
+		<CelluleStructure x="200" y="400" />
+		<SIEntity hp="100" />
+		<Spawn timer="0" />
+	</e>
+	
+	<!-- Opponents -->
+	
+	<e>
+		<Transform x="80" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="80" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
 		<SIEntity hp="100" />
 		<Spawn timer="1000" />
 	</e>
 	
 	<e>
-		<Transform x="100" y="10" rotation="90" visible="false"  alpha="1"/>
-		<TargetPos x="50" y="20" />
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
 		<SIEntity hp="100" />
-		<Spawn timer="6000" />
+		<Spawn timer="1000" />
 	</e>
+	
 	<e>
-		<Transform x="200" y="10" rotation="90" visible="false"  alpha="1"/>
-		<TargetPos x="150" y="20" />
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
 		<SIEntity hp="100" />
-		<Spawn timer="6000" />
+		<Spawn timer="4000" />
 	</e>
+	
 	<e>
-		<Transform x="350" y="10" rotation="90" visible="false"  alpha="1"/>
-		<TargetPos x="380" y="20" />
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="4500" />
+	</e>
+	
+	<e>
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="5000" />
+	</e>
+	
+	<e>
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="5500" />
+	</e>
+	
+	<e>
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
 		<SIEntity hp="100" />
 		<Spawn timer="6000" />
 	</e>
 	
-		<e>
-		<Transform x="350" y="10" rotation="90" visible="false" alpha="1" />
-		<TargetPos x="100" y="20" />
-		<Speed velocity="1" />
-		<Layered layerId="gameLayer" />
-		<TextureResource source="pictures/bactery.png" id="bactery" />
-		<Bacterie direction="90" timer="3000" maxTimer="3000" />
-		<SIEntity hp="100" />
-		<Spawn timer="15000" />
-	</e>
 	<e>
-		<Transform x="400" y="10" rotation="90" visible="false"  alpha="1"/>
-		<TargetPos x="100" y="20" />
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="6500" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
 		<Speed velocity="1" />
 		<Layered layerId="gameLayer" />
 		<TextureResource source="pictures/bactery.png" id="bactery" />
 		<Bacterie direction="90" timer="3000" maxTimer="3000" />
 		<SIEntity hp="100" />
-		<Spawn timer="15000" />
+		<Spawn timer="4250" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="4750" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="5250" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="5750" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="6250" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="6750" />
+	</e>
+	
+	<e>
+		<Transform x="200" y="100" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="110" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="210" y="100" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="210" y="110" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+		<e>
+		<Transform x="220" y="100" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="110" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="200" y="110" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="120" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="210" y="110" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="210" y="120" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="220" y="110" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="120" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+
+	<e>
+		<Transform x="200" y="120" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="130" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="210" y="120" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="210" y="130" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="220" y="120" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="130" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="13000" />
+	</e>
+	
+	<e>
+		<Transform x="100" y="150" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="100" y="160" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
+	</e>
+	
+	<e>
+		<Transform x="200" y="150" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="160" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
+	</e>
+	
+	<e>
+		<Transform x="300" y="150" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="160" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
 	</e>
 	
 </resource>
