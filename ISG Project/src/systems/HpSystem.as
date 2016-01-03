@@ -39,7 +39,6 @@ package systems {
 				tr.visible
 				tr.alpha = si.hp / 100;
 			}
-
 		}
 	}
 }

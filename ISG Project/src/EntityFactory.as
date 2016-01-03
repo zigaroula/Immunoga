@@ -37,7 +37,7 @@ package {
 			switch(_type) {
 				case Global.MACROPHAGE:
 					em.addComponent (e, TextureResource, { source:"pictures/macro.png", id:"macrophage" } );
-					em.addComponent (e, Macrophage, { absorb:10 } );
+					em.addComponent (e, Macrophage, { } );
 					break;
 				case Global.LYMPHOCYTEB:
 					em.addComponent (e, TextureResource, { source:"pictures/bCell.png", id:"lymphocyteb" } );

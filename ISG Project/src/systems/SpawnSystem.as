@@ -38,7 +38,7 @@ package systems {
 				
 				if(sp.timer >= 0) {
 					sp.timer -= delta;
-										
+					
 					if (sp.timer < 0) {
 						entityManager.removeComponent(e, spawnMapper.gene);
 						tr.visible = true;
