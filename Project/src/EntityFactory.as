@@ -29,10 +29,10 @@ package {
 		
 		static public function createEntityOfType(em:IEntityManager, _x:int, _y:int, _type:int):void {
 			var e:IEntity = em.create();
-			em.addComponent (e, Transform, {x:_x - Global.cellsize/2, y:_y - Global.cellsize/2} );
+			em.addComponent (e, Transform, {x: _x - Global.cellsize/2, y:_y - Global.cellsize/2} );
 			em.addComponent (e, Layered, { layerId:"gameLayer" } );
 			em.addComponent (e, Speed, { velocity:10 } );
-			em.addComponent (e, TargetPos, { x: _x, y: -50 } );
+			em.addComponent (e, TargetPos, { x: _x - Global.cellsize/2, y: -50 } );
 			em.addComponent (e, SIEntity, {hp: 100 } );
 			switch(_type) {
 				case Global.MACROPHAGE:
