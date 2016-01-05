@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource>
+	<!-- Définition des alias -->
+	<a name="Transform" class="com.ktm.genome.render.component.Transform" />
+	<a name="TextureResource" class="com.ktm.genome.resource.component.TextureResource" />
+	<a name="Layer" class="com.ktm.genome.render.component.Layer" />
+	<a name="Layered" class="com.ktm.genome.render.component.Layered" />
+	<a name="TargetPos" class="com.lip6.genome.geography.move.component.TargetPos" />
+	<a name="Speed" class="com.lip6.genome.geography.move.component.Speed" />	
+	
+	<a name="SIEntity" class="components.SIEntity" />
+	<a name="Bacterie" class="components.Intrus.Bacterie" />
+	<a name="Virus" class="components.Intrus.Virus" />
+	<a name="CelluleStructure" class="components.SystemeImmunitaire.CelluleStructure" />
+	
+	<a name="Ship" class="components.Game.Ship" />
+	<a name="Background" class="components.Game.Background" />
+	<a name="Spawn" class="components.Game.Spawn" />
+	<a name="Level" class="components.Game.Level" />
+
+
+	<!-- Level 5 - Recap number 1 -->	
+	
+	<!-- Game -->
+	
+	<e>
+		<Level duration="30000"  nCelStruct="3" number="5" />
+	</e>
+	
+	<!-- Structural Cells -->
+	
+	<e>
+		<Transform x="100" y="400" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="400" />
+		<Speed velocity="0.5" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/structCell.png" id="cell" />
+		<CelluleStructure x="300" y="400" />
+		<SIEntity hp="100" />
+		<Spawn timer="0" />
+	</e>
+	
+	<e>
+		<Transform x="300" y="425" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="425" />
+		<Speed velocity="0.5" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/structCell.png" id="cell" />
+		<CelluleStructure x="300" y="200" />
+		<SIEntity hp="100" />
+		<Spawn timer="0" />
+	</e>
+	
+	<e>
+		<Transform x="200" y="450" visible="false"  alpha="1"/>
+		<TargetPos x="100" y="450" />
+		<Speed velocity="0.5" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/structCell.png" id="cell" />
+		<CelluleStructure x="200" y="400" />
+		<SIEntity hp="100" />
+		<Spawn timer="0" />
+	</e>
+	
+	<!-- Opponents -->
+	
+	<e>
+		<Transform x="80" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="80" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="1000" />
+	</e>
+	
+	<e>
+		<Transform x="220" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="220" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="1000" />
+	</e>
+	
+	<e>
+		<Transform x="100" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="100" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="5000" />
+	</e>
+	
+	<e>
+		<Transform x="200" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="200" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="5000" />
+	</e>
+	
+	<e>
+		<Transform x="300" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="5000" />
+	</e>
+	
+	<e>
+		<Transform x="250" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="250" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="7000" />
+	</e>
+	
+	<e>
+		<Transform x="100" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="100" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10000" />
+	</e>
+	
+	<e>
+		<Transform x="110" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="110" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10100" />
+	</e>
+	
+	<e>
+		<Transform x="120" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="120" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10200" />
+	</e>
+	
+	<e>
+		<Transform x="130" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="130" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10300" />
+	</e>
+	
+	<e>
+		<Transform x="140" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="140" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10400" />
+	</e>
+	
+	<e>
+		<Transform x="150" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="150" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10500" />
+	</e>
+	
+	<e>
+		<Transform x="160" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="160" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10600" />
+	</e>
+	
+	<e>
+		<Transform x="170" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="170" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10700" />
+	</e>
+	
+	<e>
+		<Transform x="180" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="180" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10800" />
+	</e>
+	
+	<e>
+		<Transform x="190" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="190" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="10900" />
+	</e>
+	
+	<e>
+		<Transform x="75" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="75" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
+	</e>
+	
+	<e>
+		<Transform x="150" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="150" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
+	</e>
+	
+	<e>
+		<Transform x="225" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="225" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/bactery.png" id="bactery" />
+		<Bacterie direction="90" timer="3000" maxTimer="3000" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
+	</e>
+	
+	<e>
+		<Transform x="300" y="10" rotation="90" visible="false"  alpha="1"/>
+		<TargetPos x="300" y="20" />
+		<Speed velocity="1" />
+		<Layered layerId="gameLayer" />
+		<TextureResource source="pictures/virus.png" id="virus" />
+		<Virus direction="90" />
+		<SIEntity hp="100" />
+		<Spawn timer="17000" />
+	</e>
+	
+</resource>
